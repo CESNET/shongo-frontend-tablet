@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+
+$shongo-frontend-tablet-primary: mat.define-palette(mat.$green-palette, A700);
+$shongo-frontend-tablet-accent: mat.define-palette(mat.$blue-grey-palette, 600);
+$shongo-frontend-tablet-warn: mat.define-palette(mat.$red-palette);
+
+$shongo-frontend-tablet-theme: mat.define-light-theme((
+  color: (
+    primary: $shongo-frontend-tablet-primary,
+    accent: $shongo-frontend-tablet-accent,
+    warn: $shongo-frontend-tablet-warn,
+  )
+));
+
+@include mat.all-component-themes($shongo-frontend-tablet-theme);

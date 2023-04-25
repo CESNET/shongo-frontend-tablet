@@ -1,0 +1,9 @@
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--header-height);
+    background: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
