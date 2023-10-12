@@ -1,28 +1,23 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
 import { ShongoCalendarModule } from '@CESNET/shongo-calendar';
+import { NgModule } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MOMENT } from 'angular-calendar';
 import moment from 'moment';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [AppComponent, CalendarHeaderComponent, CalendarComponent],
-  imports: [
-    BrowserModule,
-    ShongoCalendarModule.forRoot(),
-    BrowserAnimationsModule,
-    MatToolbarModule,
-  ],
+  imports: [BrowserModule, ShongoCalendarModule.forRoot(), BrowserAnimationsModule, MatToolbarModule],
   providers: [
     {
       provide: MOMENT,
-      useValue: moment,
-    },
+      useValue: moment
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

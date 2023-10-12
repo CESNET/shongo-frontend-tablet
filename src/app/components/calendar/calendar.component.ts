@@ -3,8 +3,7 @@ import { CalendarView } from 'angular-calendar';
 
 @Component({
   selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  templateUrl: './calendar.component.html'
 })
 export class CalendarComponent {
   viewDate = new Date();

@@ -1,11 +1,17 @@
-
 @use '@angular/material' as mat;
-@include mat.core();
 
 @import 'node_modules/angular-calendar/css/angular-calendar.css';
-@import './styles/shongo-light-theme.scss';
-@import './styles/calendar-overrides.scss';
-@import './styles/variables.scss';
+@import './styles/shongo-light-theme';
+@import './styles/calendar-overrides';
+@import './styles/variables';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; };
+@include mat.core;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
