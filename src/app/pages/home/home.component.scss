@@ -1,0 +1,15 @@
+.calendar {
+  max-height: var(--calendar-height);
+  overflow-y: auto;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: var(--header-height);
+  padding: 0 var(--spacer-3);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--background-color);
+}

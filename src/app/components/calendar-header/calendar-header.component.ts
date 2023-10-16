@@ -1,12 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { CalendarView } from 'angular-calendar';
+import { Component } from '@angular/core';
+import { CalendarService } from '@app/services';
 
 @Component({
-  selector: 'app-calendar-header',
+  selector: 'header[app-calendar-header]',
   templateUrl: './calendar-header.component.html',
   styleUrls: ['./calendar-header.component.scss']
 })
 export class CalendarHeaderComponent {
-  @Input() viewDate!: Date;
-  @Input() view!: CalendarView;
+  constructor(public calendarS: CalendarService) {}
 }

@@ -1,9 +1,3 @@
 .cal-day-cell {
-  --cal-header-height: 29px;
-  --cal-cell-border-width: 1px;
-  --cal-cell-count: 5;
-  --calendar-height: calc(100vh - var(--cal-header-height) - var(--header-height));
-  --border-height: calc((var(--cal-cell-count) + 1) * var(--cal-cell-border-width));
-  --cell-height: calc(var(--calendar-height) - var(--border-height));
-  height: calc(var(--cell-height) / var(--cal-cell-count));
+  height: calc(var(--cells-height) / var(--cal-cell-count));
 }
