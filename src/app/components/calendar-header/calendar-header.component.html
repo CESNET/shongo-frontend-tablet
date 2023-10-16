@@ -1,3 +1,9 @@
-<div class="calendar-header">
-  <h1>{{ viewDate | calendarDate: view + 'ViewTitle' }}</h1>
+<div class="date-selector" app-date-selector></div>
+
+<div
+  *ngIf="{ view: (calendarS.view$ | async)!, viewDate: (calendarS.viewDate$ | async)! } as data"
+  class="calendar-header__right"
+>
+  <h2>{{ data.viewDate | calendarDate: data.view + 'ViewTitle' }}</h2>
+  <app-language-selector></app-language-selector>
 </div>

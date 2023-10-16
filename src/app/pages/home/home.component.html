@@ -1,0 +1,13 @@
+<header class="calendar-header" app-calendar-header></header>
+
+<main class="calendar">
+  <shongo-calendar
+    *ngIf="{ view: (calendarS.view$ | async)!, viewDate: (calendarS.viewDate$ | async)! } as data"
+    #calendar
+    (viewChange)="onViewChange($event)"
+    (viewDateChange)="onViewDateChange($event)"
+    [view]="data.view"
+    [viewDate]="data.viewDate"
+    [allowSlotSelection]="true"
+  ></shongo-calendar>
+</main>

@@ -8,5 +8,21 @@
   --background-color: var(--white);
 
   // Sizes
-  --header-height: 4em;
+  --header-height: 5rem;
+
+  // Spacers
+  --spacer-1: 0.25rem;
+  --spacer-2: 0.5rem;
+  --spacer-3: 1rem;
+  --spacer-4: 1.5rem;
+  --spacer-5: 2rem;
+
+  // Calendar
+  --cal-header-height: 29px;
+  --cal-cell-border-width: 1px;
+  --cal-cell-count: 5;
+  --calendar-height: calc(100vh - var(--header-height));
+  --calendar-body-height: calc(var(--calendar-height) - var(--cal-header-height));
+  --border-height: calc((var(--cal-cell-count) + 1) * var(--cal-cell-border-width));
+  --cells-height: calc(var(--calendar-body-height) - var(--border-height));
 }
