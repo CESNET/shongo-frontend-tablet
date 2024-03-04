@@ -1,6 +1,7 @@
 .calendar {
   max-height: var(--calendar-height);
   overflow-y: auto;
+  touch-action: pan-y !important;
 }
 
 .calendar-header {
