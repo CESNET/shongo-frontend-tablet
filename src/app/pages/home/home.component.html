@@ -1,6 +1,6 @@
 <header class="calendar-header" app-calendar-header></header>
 
-<main class="calendar">
+<main (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()" class="calendar">
   <shongo-calendar
     *ngIf="{ view: (calendarS.view$ | async)!, viewDate: (calendarS.viewDate$ | async)! } as data"
     #calendar

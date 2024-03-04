@@ -12,6 +12,14 @@ export class CalendarComponent {
 
   constructor(public calendarS: CalendarService) {}
 
+  onSwipeLeft(): void {
+    this.calendarS.nextView();
+  }
+
+  onSwipeRight(): void {
+    this.calendarS.previousView();
+  }
+
   onViewChange(view: CalendarView): void {
     this.calendarS.setView(view);
   }
