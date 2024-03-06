@@ -7,8 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MOMENT } from 'angular-calendar';
-import moment from 'moment';
+import { CoreModule } from 'src/core/core.module';
 import { AppComponent } from './app.component';
 import { CalendarHeaderComponent, DateSelectorComponent, LanguageSelectorComponent } from './components';
 import { CalendarComponent } from './pages';
@@ -30,13 +29,8 @@ import { CalendarComponent } from './pages';
     MatIconModule,
     HttpClientModule,
     MatMenuModule,
-    HammerModule
-  ],
-  providers: [
-    {
-      provide: MOMENT,
-      useValue: moment
-    }
+    HammerModule,
+    CoreModule
   ],
   bootstrap: [AppComponent]
 })
