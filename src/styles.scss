@@ -2,16 +2,22 @@
 
 @import 'node_modules/angular-calendar/css/angular-calendar.css';
 @import './styles/shongo-light-theme';
-@import './styles/calendar-overrides';
 @import './styles/variables';
 
 @include mat.core;
 
 html,
 body {
+  box-sizing: border-box;
   height: 100%;
 }
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
