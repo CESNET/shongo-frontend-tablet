@@ -1,0 +1,9 @@
+.create-reservation {
+  &__content {
+    padding-top: var(--spacer-4);
+  }
+
+  &__field {
+    width: 100%;
+  }
+}
