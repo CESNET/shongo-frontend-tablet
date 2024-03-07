@@ -17,6 +17,8 @@ export class CalendarHeaderComponent {
   ) {}
 
   onReserve(): void {
-    this._modalHelperS.openCreateReservation$().subscribe();
+    if (this.selectedSlot) {
+      this._modalHelperS.openCreateReservation$(this.selectedSlot).subscribe();
+    }
   }
 }

@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICreateReservation } from '@app/models/interfaces';
 import { ReservationService } from '@app/services/reservation.service';
+import { IInterval } from '@CESNET/shongo-calendar';
 
 @Component({
   selector: 'app-create-reservation',
@@ -18,14 +19,28 @@ export class CreateReservationComponent {
   constructor(
     private _fb: FormBuilder,
     private _reservationS: ReservationService,
-    private _modalRef: MatDialogRef<CreateReservationComponent>
+    private _dialogRef: MatDialogRef<CreateReservationComponent>,
+    @Inject(MAT_DIALOG_DATA) private _data: { slot: IInterval }
   ) {}
 
   onCreate(): void {
     this.isCreatingSig.set(true);
-    this._reservationS.createReservation$(this.form.value as ICreateReservation).subscribe(() => {
+
+    const description = this.form.value.description;
+    const slot = this._data?.slot;
+
+    if (!slot || !description) {
+      throw new Error('Slot or description is not defined');
+    }
+
+    const createReservation: ICreateReservation = {
+      description,
+      slot
+    };
+
+    this._reservationS.createReservation$(createReservation).subscribe(() => {
       this.isCreatingSig.set(false);
-      this._modalRef.close();
+      this._dialogRef.close();
     });
   }
 }

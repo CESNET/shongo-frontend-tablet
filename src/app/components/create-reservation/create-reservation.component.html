@@ -4,7 +4,7 @@
   <form [formGroup]="form">
     <mat-form-field class="create-reservation__field" appearance="outline">
       <mat-label>Description</mat-label>
-      <input formControlName="description" matInput type="text" />
+      <input formControlName="description" matInput type="text" autocomplete="off" spellcheck="false" />
       <mat-error *ngIf="form.controls.description.invalid">Input is required</mat-error>
     </mat-form-field>
   </form>
