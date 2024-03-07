@@ -8,14 +8,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from 'src/core/core.module';
 import { AppComponent } from './app.component';
-import { CalendarHeaderComponent, DateSelectorComponent, LanguageSelectorComponent } from './components';
-import { CreateReservationComponent } from './components/create-reservation/create-reservation.component';
+import {
+  CalendarHeaderComponent,
+  CreateReservationComponent,
+  DateSelectorComponent,
+  LanguageSelectorComponent,
+  LoadingOverlayComponent
+} from './components';
 import { CalendarComponent } from './pages';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +30,8 @@ import { CalendarComponent } from './pages';
     CalendarComponent,
     DateSelectorComponent,
     LanguageSelectorComponent,
-    CreateReservationComponent
+    CreateReservationComponent,
+    LoadingOverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +47,8 @@ import { CalendarComponent } from './pages';
     MatInputModule,
     ReactiveFormsModule,
     HammerModule,
-    CoreModule
+    CoreModule,
+    MatProgressSpinnerModule
   ],
   bootstrap: [AppComponent]
 })
