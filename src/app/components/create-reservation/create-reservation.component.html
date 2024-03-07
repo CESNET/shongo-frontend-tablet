@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Create reservation</h1>
+
+<mat-dialog-content class="create-reservation__content">
+  <form [formGroup]="form">
+    <mat-form-field class="create-reservation__field" appearance="outline">
+      <mat-label>Description</mat-label>
+      <input formControlName="description" matInput type="text" autocomplete="off" spellcheck="false" />
+      <mat-error *ngIf="form.controls.description.invalid">Input is required</mat-error>
+    </mat-form-field>
+  </form>
+
+  <app-loading-overlay *ngIf="isCreatingSig()"></app-loading-overlay>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <button [disabled]="isCreatingSig()" mat-button mat-dialog-close type="button">Cancel</button>
+  <button
+    (click)="onCreate()"
+    [disabled]="form.invalid || isCreatingSig()"
+    type="submit"
+    mat-flat-button
+    cdkFocusInitial
+    color="primary"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

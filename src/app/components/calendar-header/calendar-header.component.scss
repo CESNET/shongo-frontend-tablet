@@ -1,13 +1,19 @@
 .date-selector {
   display: flex;
   align-items: center;
-  gap: var(--spacer-2);
+
+  > *:not(:first-child) {
+    margin-left: var(--spacer-2);
+  }
 }
 
 .calendar-header {
   &__right {
     display: flex;
     align-items: center;
-    gap: var(--spacer-2);
+
+    > *:not(:first-child) {
+      margin-left: var(--spacer-4);
+    }
   }
 }

@@ -1,4 +1,4 @@
-<header class="calendar-header" app-calendar-header></header>
+<header [selectedSlot]="selectedSlot" class="calendar-header" app-calendar-header></header>
 
 <main (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()" class="calendar">
   <shongo-calendar
@@ -6,6 +6,7 @@
     #calendar
     (viewChange)="onViewChange($event)"
     (viewDateChange)="onViewDateChange($event)"
+    (slotSelected)="onSlotSelected($event)"
     [view]="data.view"
     [viewDate]="data.viewDate"
     [allowSlotSelection]="true"
