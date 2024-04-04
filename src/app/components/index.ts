@@ -3,3 +3,4 @@ export * from './create-reservation/create-reservation.component';
 export * from './date-selector/date-selector.component';
 export * from './language-selector/language-selector.component';
 export * from './loading-overlay/loading-overlay.component';
+export * from './token-modal/token-modal.component';

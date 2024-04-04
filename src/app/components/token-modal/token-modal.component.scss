@@ -1,0 +1,12 @@
+.token-modal {
+  &__form {
+    padding-top: var(--spacer-3);
+  }
+  &__field {
+    width: 100%;
+
+    &:last-of-type {
+      margin-top: var(--spacer-3);
+    }
+  }
+}
