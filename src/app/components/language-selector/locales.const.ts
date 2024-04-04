@@ -1,5 +1,5 @@
-import { ELocale } from 'src/app/models/enums';
-import { ILocaleItem } from 'src/app/models/interfaces';
+import { ELocale } from '@models/enums';
+import { ILocaleItem } from '@models/interfaces';
 
 /**
  * Items in locale selection.
