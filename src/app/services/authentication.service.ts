@@ -11,6 +11,10 @@ export class AuthenticationService {
     return !!this.deviceToken && !!this.deviceResource;
   }
 
+  get authHeader(): string {
+    return `Bearer ${this.deviceToken}`;
+  }
+
   get deviceToken(): string | null {
     return localStorage.getItem(DEVICE_TOKEN_STORAGE_KEY);
   }
