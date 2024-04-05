@@ -24,13 +24,13 @@ export class TokenModalComponent {
   }
 
   save(): void {
-    const { token } = this.formGroup.value;
+    const token = this.tokenControl.value;
 
     if (!token) {
       return;
     }
 
-    this._authS.saveAuthData$(token).subscribe({
+    this._authS.initializeAuthentication$(token).subscribe({
       next: () => this._dialogRef.close(),
       error: () => {
         this.formGroup.controls.token.setErrors({ invalidToken: true });

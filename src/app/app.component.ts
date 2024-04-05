@@ -21,6 +21,23 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    !this._authS.isAuthenticated && this._matDialog.open(TokenModalComponent, { disableClose: true, width: '40%' });
+    if (!this._authS.isAuthenticated) {
+      this._openTokenModal();
+    } else {
+      this._checkAuthentication();
+    }
+  }
+
+  private _checkAuthentication(): void {
+    this._authS.initializeAuthentication$(this._authS.deviceToken!).subscribe({
+      error: () => {
+        this._authS.clearAuthentication();
+        this._openTokenModal();
+      }
+    });
+  }
+
+  private _openTokenModal(): void {
+    this._matDialog.open(TokenModalComponent, { disableClose: true, width: '40%' });
   }
 }

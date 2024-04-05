@@ -13,7 +13,7 @@ export class AuthenticationService {
   constructor(private _http: HttpClient) {}
 
   get isAuthenticated(): boolean {
-    return !!this.deviceToken && !!this.deviceResource;
+    return !!this.deviceToken;
   }
 
   get authHeader(): string {
@@ -28,17 +28,22 @@ export class AuthenticationService {
     return localStorage.getItem(DEVICE_RESOURCE_STORAGE_KEY);
   }
 
-  saveAuthData$(token: string): Observable<IDeviceData> {
+  clearAuthentication(): void {
+    localStorage.removeItem(DEVICE_TOKEN_STORAGE_KEY);
+    localStorage.removeItem(DEVICE_RESOURCE_STORAGE_KEY);
+  }
+
+  initializeAuthentication$(token: string): Observable<IDeviceData> {
     localStorage.setItem(DEVICE_TOKEN_STORAGE_KEY, token);
 
-    return this.fetchDeviceData$().pipe(
+    return this._fetchDeviceData$().pipe(
       tap(({ resourceId }) => {
         localStorage.setItem(DEVICE_RESOURCE_STORAGE_KEY, resourceId);
       })
     );
   }
 
-  fetchDeviceData$(): Observable<IDeviceData> {
+  private _fetchDeviceData$(): Observable<IDeviceData> {
     return this._http.get<IDeviceData>('/api/v1/reservation_device', {
       headers: {
         Authorization: this.authHeader
