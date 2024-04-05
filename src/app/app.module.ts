@@ -21,6 +21,7 @@ import {
   LanguageSelectorComponent,
   LoadingOverlayComponent
 } from './components';
+import { TokenModalComponent } from './components/token-modal/token-modal.component';
 import { CalendarComponent } from './pages';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CalendarComponent } from './pages';
     DateSelectorComponent,
     LanguageSelectorComponent,
     CreateReservationComponent,
-    LoadingOverlayComponent
+    LoadingOverlayComponent,
+    TokenModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Enter authentication data for this device</h1>
+
+<form [formGroup]="formGroup" mat-dialog-content class="token-modal__form">
+  <mat-form-field class="token-modal__field" appearance="outline">
+    <mat-label>Authentization token</mat-label>
+    <input formControlName="token" matInput />
+    <mat-error *ngIf="tokenControl.errors?.['required']">Token is required</mat-error>
+    <mat-error *ngIf="tokenControl.errors?.['invalidToken']">Token is invalid</mat-error>
+  </mat-form-field>
+</form>
+
+<div mat-dialog-actions [align]="'end'">
+  <button (mwlClick)="save()" [disabled]="formGroup.invalid" mat-flat-button color="primary">Save</button>
+</div>

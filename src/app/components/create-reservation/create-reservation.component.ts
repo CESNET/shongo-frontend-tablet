@@ -1,9 +1,10 @@
+import { IInterval } from '@CESNET/shongo-calendar';
 import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ICreateReservation } from '@app/models/interfaces';
 import { ReservationService } from '@app/services/reservation.service';
-import { IInterval } from '@CESNET/shongo-calendar';
+import { ICreateReservation } from '@models/interfaces';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-create-reservation',
@@ -38,9 +39,15 @@ export class CreateReservationComponent {
       slot
     };
 
-    this._reservationS.createReservation$(createReservation).subscribe(() => {
-      this.isCreatingSig.set(false);
-      this._dialogRef.close();
-    });
+    this._reservationS
+      .createReservation$(createReservation)
+      .pipe(
+        finalize(() => {
+          this.isCreatingSig.set(false);
+        })
+      )
+      .subscribe(() => {
+        this._dialogRef.close();
+      });
   }
 }
