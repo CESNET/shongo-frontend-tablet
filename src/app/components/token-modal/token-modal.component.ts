@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from '@app/services/authentication.service';
 
@@ -10,8 +10,7 @@ import { AuthenticationService } from '@app/services/authentication.service';
 })
 export class TokenModalComponent {
   readonly formGroup = this._fb.group({
-    token: ['', Validators.required],
-    resource: ['', Validators.required]
+    token: ['', Validators.required]
   });
 
   constructor(
@@ -20,13 +19,22 @@ export class TokenModalComponent {
     private _dialogRef: MatDialogRef<TokenModalComponent>
   ) {}
 
-  save(): void {
-    const { token, resource } = this.formGroup.value;
+  get tokenControl(): FormControl<string | null> {
+    return this.formGroup.controls.token;
+  }
 
-    if (token && resource) {
-      this._authS.setAuthData(token, resource);
+  save(): void {
+    const { token } = this.formGroup.value;
+
+    if (!token) {
+      return;
     }
 
-    this._dialogRef.close();
+    this._authS.saveAuthData$(token).subscribe({
+      next: () => this._dialogRef.close(),
+      error: () => {
+        this.formGroup.controls.token.setErrors({ invalidToken: true });
+      }
+    });
   }
 }

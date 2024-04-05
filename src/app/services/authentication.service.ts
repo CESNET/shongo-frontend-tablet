@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IDeviceData } from '@app/models/interfaces';
+import { Observable, tap } from 'rxjs';
 
 const DEVICE_TOKEN_STORAGE_KEY = 'shongo-device-token';
 const DEVICE_RESOURCE_STORAGE_KEY = 'shongo-device-resource';
@@ -7,6 +10,8 @@ const DEVICE_RESOURCE_STORAGE_KEY = 'shongo-device-resource';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  constructor(private _http: HttpClient) {}
+
   get isAuthenticated(): boolean {
     return !!this.deviceToken && !!this.deviceResource;
   }
@@ -23,8 +28,21 @@ export class AuthenticationService {
     return localStorage.getItem(DEVICE_RESOURCE_STORAGE_KEY);
   }
 
-  setAuthData(token: string, resource: string): void {
+  saveAuthData$(token: string): Observable<IDeviceData> {
     localStorage.setItem(DEVICE_TOKEN_STORAGE_KEY, token);
-    localStorage.setItem(DEVICE_RESOURCE_STORAGE_KEY, resource);
+
+    return this.fetchDeviceData$().pipe(
+      tap(({ resourceId }) => {
+        localStorage.setItem(DEVICE_RESOURCE_STORAGE_KEY, resourceId);
+      })
+    );
+  }
+
+  fetchDeviceData$(): Observable<IDeviceData> {
+    return this._http.get<IDeviceData>('/api/v1/reservation_device', {
+      headers: {
+        Authorization: this.authHeader
+      }
+    });
   }
 }
