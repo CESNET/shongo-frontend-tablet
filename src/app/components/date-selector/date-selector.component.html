@@ -1,4 +1,4 @@
-<button *ngIf="(calendarS.view$ | async) === CalendarView.Day" (mwlClick)="onBackToMonth()" mat-button>
+<button *ngIf="calendarS.viewSig() === CalendarView.Day" (mwlClick)="onBackToMonth()" mat-button>
   <mat-icon>arrow_back</mat-icon>
   Back to month
 </button>
@@ -6,28 +6,23 @@
 <button
   #previousButton
   (viewDateChange)="onViewDateChange($event)"
-  [view]="(calendarS.view$ | async)!"
-  [viewDate]="(calendarS.viewDate$ | async)!"
+  [view]="calendarS.viewSig()"
+  [viewDate]="calendarS.viewDateSig()"
   mwlCalendarPreviousView
   mat-icon-button
 >
   <mat-icon>chevron_left</mat-icon>
 </button>
 
-<button
-  (viewDateChange)="onViewDateChange($event)"
-  [viewDate]="(calendarS.viewDate$ | async)!"
-  mwlCalendarToday
-  mat-button
->
+<button (viewDateChange)="onViewDateChange($event)" [viewDate]="calendarS.viewDateSig()" mwlCalendarToday mat-button>
   Today
 </button>
 
 <button
   #nextButton
   (viewDateChange)="onViewDateChange($event)"
-  [view]="(calendarS.view$ | async)!"
-  [viewDate]="(calendarS.viewDate$ | async)!"
+  [view]="calendarS.viewSig()"
+  [viewDate]="calendarS.viewDateSig()"
   mwlCalendarNextView
   mat-icon-button
 >

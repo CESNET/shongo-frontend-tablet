@@ -1,10 +1,7 @@
 <div class="date-selector" app-date-selector></div>
 
-<div
-  *ngIf="{ view: (calendarS.view$ | async)!, viewDate: (calendarS.viewDate$ | async)! } as data"
-  class="calendar-header__right"
->
+<div class="calendar-header__right">
   <button (mwlClick)="onReserve()" [disabled]="!selectedSlot" mat-flat-button color="primary">Reserve</button>
-  <h2>{{ data.viewDate | calendarDate: data.view + 'ViewTitle' }}</h2>
+  <h2>{{ calendarS.viewDateSig() | calendarDate: calendarS.viewSig() + 'ViewTitle' }}</h2>
   <app-language-selector></app-language-selector>
 </div>

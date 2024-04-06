@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from 'src/core/core.module';
 import { AppComponent } from './app.component';
 import {
@@ -50,7 +51,8 @@ import { CalendarComponent } from './pages';
     ReactiveFormsModule,
     HammerModule,
     CoreModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })
