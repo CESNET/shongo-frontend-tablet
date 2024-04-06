@@ -14,7 +14,7 @@ import { ApiService } from './api.service';
 export class ReservationService {
   constructor(private _apiS: ApiService) {}
 
-  createReservation$(body: ICreateReservation): Observable<IReservationRequest> {
+  createReservation$(body: ICreateReservation): Observable<{ id: string }> {
     return this._apiS.post<IReservationRequest>('/api/v1/reservation_requests', body);
   }
 

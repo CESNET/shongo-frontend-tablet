@@ -1,18 +1,30 @@
-<header [selectedSlot]="selectedSlot" class="calendar-header" app-calendar-header></header>
+<ng-container
+  *ngIf="{
+    view: (calendarS.view$ | async)!,
+    viewDate: (calendarS.viewDate$ | async)!,
+    request: calendarS.requestSig()
+  } as data"
+>
+  <header
+    (reservationCreated)="calendar.clearSelectedSlot()"
+    [selectedSlot]="selectedSlot"
+    class="calendar-header"
+    app-calendar-header
+  ></header>
 
-<main (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()" class="calendar">
-  <shongo-calendar
-    *ngIf="{ view: (calendarS.view$ | async)!, viewDate: (calendarS.viewDate$ | async)! } as data"
-    #calendar
-    (viewChange)="onViewChange($event)"
-    (viewDateChange)="onViewDateChange($event)"
-    (slotSelected)="onSlotSelected($event)"
-    (loadData)="onLoadData($event)"
-    [view]="data.view"
-    [viewDate]="data.viewDate"
-    [allowSlotSelection]="true"
-    [fill]="true"
-    [items]="requestSig().data"
-    [loading]="requestSig().state === ERequestState.LOADING"
-  ></shongo-calendar>
-</main>
+  <main (swipeleft)="calendarS.nextView()" (swiperight)="calendarS.previousView()" class="calendar">
+    <shongo-calendar
+      #calendar
+      (viewChange)="calendarS.setView($event)"
+      (viewDateChange)="calendarS.setViewDate($event)"
+      (slotSelected)="onSlotSelected($event)"
+      (loadData)="calendarS.loadInterval($event)"
+      [view]="data.view"
+      [viewDate]="data.viewDate"
+      [allowSlotSelection]="true"
+      [fill]="true"
+      [items]="data.request.data"
+      [loading]="data.request.state === ERequestState.LOADING"
+    ></shongo-calendar>
+  </main>
+</ng-container>
