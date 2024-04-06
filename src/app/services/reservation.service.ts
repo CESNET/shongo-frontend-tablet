@@ -3,10 +3,11 @@ import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiResponse } from '@app/models/interfaces/api-response.interface';
 import { ERequestState } from '@models/enums';
-import { ICreateReservation, IRequest, IReservationRequest } from '@models/interfaces';
+import { IRequest, IReservationRequest } from '@models/interfaces';
 import moment from 'moment';
-import { BehaviorSubject, Observable, catchError, first, map } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, first, iif, map, of, switchMap } from 'rxjs';
 import { ApiService } from './api.service';
+import { AuthenticationService } from './authentication.service';
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -15,11 +16,31 @@ import { NotificationService } from './notification.service';
 export class ReservationService {
   constructor(
     private _apiS: ApiService,
-    private _notificationS: NotificationService
+    private _notificationS: NotificationService,
+    private _authS: AuthenticationService
   ) {}
 
-  createReservation$(body: ICreateReservation): Observable<{ id: string }> {
-    return this._apiS.post<IReservationRequest>('/api/v1/reservation_requests', body);
+  createReservation$(slot: IInterval, description: string): Observable<{ id: string }> {
+    const resourceId$ = iif(
+      () => !!this._authS.deviceResource,
+      of(this._authS.deviceResource),
+      this._authS.checkAuthentication$().pipe(map((data) => data.resourceId))
+    );
+
+    return resourceId$.pipe(
+      map((resourceId) => ({
+        resource: resourceId,
+        description,
+        slot,
+        periodicity: {
+          type: 'NONE'
+        },
+        type: 'PHYSICAL_RESOURCE'
+      })),
+      switchMap((body) => {
+        return this._apiS.post<IReservationRequest>('/api/v1/reservation_requests', body);
+      })
+    );
   }
 
   fetchInterval$(interval: IInterval): Observable<IRequest<ICalendarItem[]>> {

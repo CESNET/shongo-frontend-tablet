@@ -16,7 +16,7 @@
     [viewDate]="calendarS.viewDateSig()"
     [allowSlotSelection]="true"
     [fill]="true"
-    [items]="calendarS.requestSig().data"
-    [loading]="calendarS.requestSig().state === ERequestState.LOADING"
+    [items]="calendarS.calendarItemsSig()"
+    [loading]="calendarS.stateSig() === ERequestState.LOADING"
   ></shongo-calendar>
 </main>

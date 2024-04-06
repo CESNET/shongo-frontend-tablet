@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { TokenModalComponent } from '@app/components';
 import { IDeviceData } from '@app/models/interfaces';
-import { Observable, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, tap } from 'rxjs';
 
 const DEVICE_TOKEN_STORAGE_KEY = 'shongo-device-token';
 const DEVICE_RESOURCE_STORAGE_KEY = 'shongo-device-resource';
@@ -10,7 +12,10 @@ const DEVICE_RESOURCE_STORAGE_KEY = 'shongo-device-resource';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private _matDialog: MatDialog
+  ) {}
 
   get isAuthenticated(): boolean {
     return !!this.deviceToken;
@@ -41,6 +46,20 @@ export class AuthenticationService {
         localStorage.setItem(DEVICE_RESOURCE_STORAGE_KEY, resourceId);
       })
     );
+  }
+
+  checkAuthentication$(): Observable<IDeviceData> {
+    return this.initializeAuthentication$(this.deviceToken!).pipe(
+      catchError(() => {
+        this.clearAuthentication();
+        this.openTokenModal();
+        return EMPTY;
+      })
+    );
+  }
+
+  openTokenModal(): void {
+    this._matDialog.open(TokenModalComponent, { disableClose: true, width: '40%' });
   }
 
   private _fetchDeviceData$(): Observable<IDeviceData> {
