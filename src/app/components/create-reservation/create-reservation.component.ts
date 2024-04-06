@@ -3,6 +3,7 @@ import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from '@app/services/authentication.service';
+import { NotificationService } from '@app/services/notification.service';
 import { ReservationService } from '@app/services/reservation.service';
 import { ICreateReservation } from '@models/interfaces';
 import { catchError, finalize } from 'rxjs';
@@ -23,6 +24,7 @@ export class CreateReservationComponent {
     private _reservationS: ReservationService,
     private _dialogRef: MatDialogRef<CreateReservationComponent>,
     private _authS: AuthenticationService,
+    private _notificationS: NotificationService,
     @Inject(MAT_DIALOG_DATA) private _data: { slot: IInterval }
   ) {}
 
@@ -50,7 +52,7 @@ export class CreateReservationComponent {
       .createReservation$(createReservation)
       .pipe(
         catchError((err) => {
-          // TODO: Add alert
+          this._notificationS.error('Failed to create reservation');
           throw err;
         }),
         finalize(() => {
@@ -58,6 +60,7 @@ export class CreateReservationComponent {
         })
       )
       .subscribe(() => {
+        this._notificationS.success('Reservation created');
         this._dialogRef.close(true);
       });
   }

@@ -7,12 +7,16 @@ import { ICreateReservation, IRequest, IReservationRequest } from '@models/inter
 import moment from 'moment';
 import { BehaviorSubject, Observable, catchError, first, map } from 'rxjs';
 import { ApiService } from './api.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  constructor(private _apiS: ApiService) {}
+  constructor(
+    private _apiS: ApiService,
+    private _notificationS: NotificationService
+  ) {}
 
   createReservation$(body: ICreateReservation): Observable<{ id: string }> {
     return this._apiS.post<IReservationRequest>('/api/v1/reservation_requests', body);
@@ -39,7 +43,7 @@ export class ReservationService {
         map((reservations) => reservations.items.map((res) => this._createCalendarItem(res))),
         catchError((err) => {
           console.error(err);
-          // TODO: Add alert
+          this._notificationS.error('Failed to fetch reservations');
           return [];
         })
       )
