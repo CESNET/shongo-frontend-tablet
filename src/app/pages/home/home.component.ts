@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { ICalendarItem, IInterval } from '@CESNET/shongo-calendar';
+import { Component, signal } from '@angular/core';
+import { ERequestState } from '@app/models/enums';
 import { CalendarService } from '@app/services';
-import { IInterval } from '@CESNET/shongo-calendar';
+import { ReservationService } from '@app/services/reservation.service';
+import { IRequest } from '@models/interfaces';
 import { CalendarView } from 'angular-calendar';
 
 @Component({
@@ -11,9 +14,17 @@ import { CalendarView } from 'angular-calendar';
 export class CalendarComponent {
   selectedSlot: IInterval | null = null;
 
+  readonly requestSig = signal<IRequest<ICalendarItem[]>>({
+    data: [],
+    state: ERequestState.LOADING
+  });
   readonly CalendarView = CalendarView;
+  readonly ERequestState = ERequestState;
 
-  constructor(public calendarS: CalendarService) {}
+  constructor(
+    public calendarS: CalendarService,
+    private _reservationS: ReservationService
+  ) {}
 
   onSwipeLeft(): void {
     this.calendarS.nextView();
@@ -33,5 +44,11 @@ export class CalendarComponent {
 
   onSlotSelected(slot: IInterval | null): void {
     this.selectedSlot = slot;
+  }
+
+  onLoadData(interval: IInterval): void {
+    this._reservationS.fetchInterval$(interval).subscribe((request) => {
+      this.requestSig.set(request);
+    });
   }
 }

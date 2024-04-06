@@ -7,9 +7,12 @@
     (viewChange)="onViewChange($event)"
     (viewDateChange)="onViewDateChange($event)"
     (slotSelected)="onSlotSelected($event)"
+    (loadData)="onLoadData($event)"
     [view]="data.view"
     [viewDate]="data.viewDate"
     [allowSlotSelection]="true"
     [fill]="true"
+    [items]="requestSig().data"
+    [loading]="requestSig().state === ERequestState.LOADING"
   ></shongo-calendar>
 </main>
