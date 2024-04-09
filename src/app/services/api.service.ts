@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthenticationError } from '@app/models/errors';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -13,22 +14,26 @@ export class ApiService {
     private _authS: AuthenticationService
   ) {}
 
-  get<T>(url: string, options?: Record<string, unknown>): Observable<T> {
+  get<T>(path: string, options?: Record<string, unknown>): Observable<T> {
     this._checkAuthentication();
 
-    return this._http.get<T>(url, {
+    return this._http.get<T>(this._buildUrl(path), {
       ...options,
       headers: this._getHeaders()
     });
   }
 
-  post<T>(url: string, body: unknown, options?: Record<string, unknown>): Observable<T> {
+  post<T>(path: string, body: unknown, options?: Record<string, unknown>): Observable<T> {
     this._checkAuthentication();
 
-    return this._http.post<T>(url, body, {
+    return this._http.post<T>(this._buildUrl(path), body, {
       ...options,
       headers: this._getHeaders()
     });
+  }
+
+  private _buildUrl(path: string): string {
+    return `${environment.baseHref}${path}`;
   }
 
   private _getHeaders(): Record<string, string> {
