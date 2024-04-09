@@ -3,7 +3,8 @@ import { Injectable, signal } from '@angular/core';
 import { ERequestState } from '@app/models/enums';
 import { IRequest } from '@app/models/interfaces';
 import { CalendarView } from 'angular-calendar';
-import { EMPTY, Observable, Subject, catchError, interval, switchMap, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, filter, interval, switchMap, tap } from 'rxjs';
+import { AuthenticationService } from '.';
 import { ReservationService } from './reservation.service';
 
 const RELOAD_INTERVAL_MIN = 5;
@@ -25,7 +26,10 @@ export class CalendarService {
   private readonly _nextView$ = new Subject<void>();
   private readonly _previousView$ = new Subject<void>();
 
-  constructor(private _reservationS: ReservationService) {
+  constructor(
+    private _reservationS: ReservationService,
+    private _authS: AuthenticationService
+  ) {
     this.nextView$ = this._nextView$.asObservable();
     this.previousView$ = this._previousView$.asObservable();
 
@@ -62,7 +66,10 @@ export class CalendarService {
    */
   private _startReloadInterval(): void {
     interval(RELOAD_INTERVAL_MIN * 60 * 1000)
-      .pipe(switchMap(() => this._reloadInterval$().pipe(catchError(() => EMPTY))))
+      .pipe(
+        filter(() => this._authS.isAuthenticated),
+        switchMap(() => this._reloadInterval$().pipe(catchError(() => EMPTY)))
+      )
       .subscribe();
   }
 

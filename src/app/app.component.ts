@@ -11,17 +11,17 @@ export class AppComponent implements OnInit {
   constructor(
     registry: MatIconRegistry,
     domSanitizer: DomSanitizer,
-    private _authS: AuthenticationService
+    public authS: AuthenticationService
   ) {
     registry.addSvgIcon('flag-en', domSanitizer.bypassSecurityTrustResourceUrl('assets/img/i18n/GB.svg'));
     registry.addSvgIcon('flag-cz', domSanitizer.bypassSecurityTrustResourceUrl('assets/img/i18n/CZ.svg'));
   }
 
   ngOnInit(): void {
-    if (!this._authS.isAuthenticated) {
-      this._authS.openTokenModal();
+    if (!this.authS.isAuthenticated) {
+      this.authS.openTokenModal();
     } else {
-      this._authS.checkAuthentication$().subscribe();
+      this.authS.checkAuthentication$().subscribe();
     }
   }
 }
