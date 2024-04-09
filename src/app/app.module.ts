@@ -1,4 +1,3 @@
-import { ShongoCalendarModule } from '@CESNET/shongo-calendar';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShongoCalendarModule } from '@cesnet/shongo-calendar';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from 'src/core/core.module';
 import { AppComponent } from './app.component';

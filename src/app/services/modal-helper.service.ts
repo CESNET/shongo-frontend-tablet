@@ -1,7 +1,7 @@
-import { IInterval } from '@CESNET/shongo-calendar';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateReservationComponent } from '@app/components';
+import { IInterval } from '@cesnet/shongo-calendar';
 import { Observable } from 'rxjs';
 
 @Injectable({

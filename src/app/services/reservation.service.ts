@@ -1,7 +1,7 @@
-import { ICalendarItem, IInterval } from '@CESNET/shongo-calendar';
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiResponse } from '@app/models/interfaces/api-response.interface';
+import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
 import { ERequestState } from '@models/enums';
 import { IRequest, IReservationRequest } from '@models/interfaces';
 import moment from 'moment';

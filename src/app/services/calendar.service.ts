@@ -1,7 +1,7 @@
-import { ICalendarItem, IInterval } from '@CESNET/shongo-calendar';
 import { Injectable, signal } from '@angular/core';
 import { ERequestState } from '@app/models/enums';
 import { IRequest } from '@app/models/interfaces';
+import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
 import { CalendarView } from 'angular-calendar';
 import { EMPTY, Observable, Subject, catchError, filter, interval, switchMap, tap } from 'rxjs';
 import { AuthenticationService } from '.';

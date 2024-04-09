@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CalendarService } from '@app/services';
 import { ModalHelperService } from '@app/services/modal-helper.service';
-import { IInterval } from '@CESNET/shongo-calendar';
+import { IInterval } from '@cesnet/shongo-calendar';
 
 @Component({
   selector: 'header[app-calendar-header]',

@@ -1,7 +1,7 @@
-import { IInterval } from '@CESNET/shongo-calendar';
 import { Component } from '@angular/core';
 import { ERequestState } from '@app/models/enums';
 import { CalendarService } from '@app/services';
+import { IInterval } from '@cesnet/shongo-calendar';
 import { CalendarView } from 'angular-calendar';
 
 @Component({

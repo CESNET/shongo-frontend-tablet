@@ -1,9 +1,9 @@
-import { IInterval } from '@CESNET/shongo-calendar';
 import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from '@app/services/notification.service';
 import { ReservationService } from '@app/services/reservation.service';
+import { IInterval } from '@cesnet/shongo-calendar';
 import { catchError, finalize } from 'rxjs';
 
 @Component({

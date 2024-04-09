@@ -1,4 +1,4 @@
-import { IInterval } from '@CESNET/shongo-calendar';
+import { IInterval } from '@cesnet/shongo-calendar';
 
 export interface ICreateReservation {
   description: string;
