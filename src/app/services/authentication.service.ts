@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TokenModalComponent } from '@app/components';
 import { IDeviceData } from '@app/models/interfaces';
 import { EMPTY, Observable, catchError, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const DEVICE_TOKEN_STORAGE_KEY = 'shongo-device-token';
 const DEVICE_RESOURCE_STORAGE_KEY = 'shongo-device-resource';
@@ -63,7 +64,7 @@ export class AuthenticationService {
   }
 
   private _fetchDeviceData$(): Observable<IDeviceData> {
-    return this._http.get<IDeviceData>('/api/v1/reservation_device', {
+    return this._http.get<IDeviceData>(`${environment.baseHref}/api/v1/reservation_device`, {
       headers: {
         Authorization: this.authHeader
       }
