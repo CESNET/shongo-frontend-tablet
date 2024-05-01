@@ -3,5 +3,4 @@
 <div class="calendar-header__right">
   <button (mwlClick)="onReserve()" [disabled]="!selectedSlot" mat-flat-button color="primary">Reserve</button>
   <h2>{{ calendarS.viewDateSig() | calendarDate: calendarS.viewSig() + 'ViewTitle' }}</h2>
-  <app-language-selector></app-language-selector>
 </div>
