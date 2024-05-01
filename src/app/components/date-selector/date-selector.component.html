@@ -1,7 +1,9 @@
-<button *ngIf="calendarS.viewSig() === CalendarView.Day" (mwlClick)="onBackToMonth()" mat-button>
-  <mat-icon>arrow_back</mat-icon>
-  Back to month
-</button>
+<a routerLink="/">
+  <button mat-button>
+    <mat-icon>arrow_back</mat-icon>
+    Back
+  </button>
+</a>
 
 <button
   #previousButton

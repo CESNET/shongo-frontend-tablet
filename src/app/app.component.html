@@ -1,7 +1,1 @@
-<ng-container *ngIf="authS.isAuthenticated">
-  <app-happening-today-page *ngIf="showHappeningToday; else reservationPage"></app-happening-today-page>
-
-  <ng-template #reservationPage>
-    <app-reservation-page></app-reservation-page>
-  </ng-template>
-</ng-container>
+<router-outlet></router-outlet>

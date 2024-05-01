@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShongoCalendarModule } from '@cesnet/shongo-calendar';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from 'src/core/core.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   CalendarHeaderComponent,
@@ -56,7 +57,8 @@ import { HappeningTodayPageComponent } from './pages/happening-today-page/happen
     HammerModule,
     CoreModule,
     MatProgressSpinnerModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
