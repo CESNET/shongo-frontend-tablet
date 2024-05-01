@@ -23,13 +23,13 @@ import {
   LoadingOverlayComponent
 } from './components';
 import { TokenModalComponent } from './components/token-modal/token-modal.component';
-import { CalendarComponent } from './pages';
+import { ReservationPageComponent } from './pages';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarHeaderComponent,
-    CalendarComponent,
+    ReservationPageComponent,
     DateSelectorComponent,
     LanguageSelectorComponent,
     CreateReservationComponent,
