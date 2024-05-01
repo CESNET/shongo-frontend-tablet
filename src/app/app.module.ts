@@ -23,7 +23,9 @@ import {
   LoadingOverlayComponent
 } from './components';
 import { TokenModalComponent } from './components/token-modal/token-modal.component';
+import { UpcomingEventComponent } from './components/upcoming-event/upcoming-event.component';
 import { ReservationPageComponent } from './pages';
+import { HappeningTodayPageComponent } from './pages/happening-today-page/happening-today-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ReservationPageComponent } from './pages';
     LanguageSelectorComponent,
     CreateReservationComponent,
     LoadingOverlayComponent,
-    TokenModalComponent
+    TokenModalComponent,
+    HappeningTodayPageComponent,
+    UpcomingEventComponent
   ],
   imports: [
     BrowserModule,

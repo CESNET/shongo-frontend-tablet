@@ -8,6 +8,8 @@ import { AuthenticationService } from './services/authentication.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
+  showHappeningToday = true;
+
   constructor(
     registry: MatIconRegistry,
     domSanitizer: DomSanitizer,
