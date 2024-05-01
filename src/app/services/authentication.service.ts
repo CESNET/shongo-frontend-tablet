@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { TokenModalComponent } from '@app/components';
 import { IDeviceData } from '@app/models/interfaces';
 import { EMPTY, Observable, catchError, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ModalHelperService } from './modal-helper.service';
 
 const DEVICE_TOKEN_STORAGE_KEY = 'shongo-device-token';
 const DEVICE_RESOURCE_STORAGE_KEY = 'shongo-device-resource';
@@ -15,7 +14,7 @@ const DEVICE_RESOURCE_STORAGE_KEY = 'shongo-device-resource';
 export class AuthenticationService {
   constructor(
     private _http: HttpClient,
-    private _matDialog: MatDialog
+    private _modalHelperS: ModalHelperService
   ) {}
 
   get isAuthenticated(): boolean {
@@ -60,7 +59,7 @@ export class AuthenticationService {
   }
 
   openTokenModal(): void {
-    this._matDialog.open(TokenModalComponent, { disableClose: true, width: '40%' });
+    this._modalHelperS.openTokenModal();
   }
 
   private _fetchDeviceData$(): Observable<IDeviceData> {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateReservationComponent } from '@app/components';
+import { CreateReservationComponent, TokenModalComponent } from '@app/components';
 import { IInterval } from '@cesnet/shongo-calendar';
 import { Observable } from 'rxjs';
 
@@ -19,5 +19,9 @@ export class ModalHelperService {
     });
 
     return dialogRef.afterClosed();
+  }
+
+  openTokenModal(): void {
+    this._dialog.open(TokenModalComponent, { disableClose: true, width: '40%' });
   }
 }
