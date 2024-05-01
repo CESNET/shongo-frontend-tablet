@@ -67,8 +67,35 @@
     font-size: 2rem;
   }
 
-  &__upcoming-events {
+  &__events {
+    display: flex;
+    flex-direction: column;
     margin-top: 4rem;
+  }
+
+  &__event {
+    margin-bottom: 1.5rem;
+  }
+
+  &__book-now {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 15rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+    text-decoration: none;
+    color: var(--white);
+    border: 1px solid #dfdfdf;
+    border-radius: 16px;
+    background-color: rgb(240 240 240 / 26%);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    touch-action: manipulation;
   }
 }
 

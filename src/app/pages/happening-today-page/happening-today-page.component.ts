@@ -1,6 +1,5 @@
-import { Component, signal } from '@angular/core';
-
-const SECOND_INTERVAL = 1000;
+import { Component } from '@angular/core';
+import { HappeningTodayService } from '@app/services/happening-today.service';
 
 @Component({
   selector: 'app-happening-today-page',
@@ -8,9 +7,5 @@ const SECOND_INTERVAL = 1000;
   styleUrls: ['./happening-today-page.component.scss']
 })
 export class HappeningTodayPageComponent {
-  readonly todaySig = signal(new Date());
-
-  constructor() {
-    setInterval(() => this.todaySig.set(new Date()), SECOND_INTERVAL);
-  }
+  constructor(public happeningTodayS: HappeningTodayService) {}
 }

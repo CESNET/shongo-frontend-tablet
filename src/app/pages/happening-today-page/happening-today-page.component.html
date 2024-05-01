@@ -8,10 +8,21 @@
       <img src="/assets/img/logo-cesnet-light.png" alt="CESNET" width="228" height="87" class="happening-today__logo" />
 
       <div>
-        <h1 class="happening-today__heading">Room Available</h1>
-        <h2 class="happening-today__subheading">Next meeting in 1.5 hours | technical meeting</h2>
+        <h1 class="happening-today__heading">
+          {{ happeningTodayS.isAvailableSig() ? 'Room Available' : 'Ongoing Meeting' }}
+        </h1>
+        <h2
+          *ngIf="happeningTodayS.nextMeetingSig() as nextMeeting; else noMoreMeetings"
+          class="happening-today__subheading"
+        >
+          Next meeting in {{ happeningTodayS.timeToNextMeetingSig() }} | {{ nextMeeting.title }}
+        </h2>
 
-        <button mat-raised-button color="primary">Book Now</button>
+        <ng-template #noMoreMeetings>
+          <h2 class="happening-today__subheading">No more meetings today</h2>
+        </ng-template>
+
+        <button class="happening-today__book-now">Book Now</button>
       </div>
     </main>
 
@@ -19,11 +30,17 @@
       <div class="background-filter"></div>
 
       <div class="happening-today__sidebar-content">
-        <h1 class="happening-today__heading">{{ todaySig() | date: 'HH:MM' }}</h1>
-        <h2 class="happening-today__subheading">{{ todaySig() | date: 'EEEE, LLL d' }}</h2>
+        <h1 class="happening-today__heading">{{ happeningTodayS.todaySig() | date: 'HH:MM' }}</h1>
+        <h2 class="happening-today__subheading">{{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' }}</h2>
 
-        <div class="happening-today__upcoming-events">
-          <app-upcoming-event [description]="'asd'" [start]="todaySig()" [end]="todaySig()"></app-upcoming-event>
+        <div class="happening-today__events">
+          <app-upcoming-event
+            *ngFor="let event of happeningTodayS.upcomingMeetingsSig()"
+            [description]="event.title"
+            [start]="event.slot.start"
+            [end]="event.slot.end"
+            class="happening-today__event"
+          ></app-upcoming-event>
         </div>
       </div>
     </aside>
