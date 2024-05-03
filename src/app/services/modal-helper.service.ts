@@ -12,7 +12,7 @@ export class ModalHelperService {
 
   openCreateReservation$(slot: IInterval): Observable<unknown> {
     const dialogRef = this._dialog.open<CreateReservationModalComponent>(CreateReservationModalComponent, {
-      width: '40%',
+      width: '50%',
       data: {
         slot
       },
@@ -25,6 +25,6 @@ export class ModalHelperService {
   }
 
   openTokenModal(): void {
-    this._dialog.open(TokenModalComponent, { disableClose: true, width: '40%', position: { top: '10%' } });
+    this._dialog.open(TokenModalComponent, { disableClose: true, width: '50%', position: { top: '10%' } });
   }
 }
