@@ -5,7 +5,8 @@ import { CalendarView } from 'angular-calendar';
 
 @Component({
   selector: 'div[app-date-selector]',
-  templateUrl: './date-selector.component.html'
+  templateUrl: './date-selector.component.html',
+  styleUrls: ['./date-selector.component.scss']
 })
 export class DateSelectorComponent implements AfterViewInit {
   @ViewChild('nextButton', { static: true, read: ElementRef }) nextButton!: ElementRef<HTMLButtonElement>;
