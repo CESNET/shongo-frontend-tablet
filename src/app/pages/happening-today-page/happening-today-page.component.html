@@ -38,7 +38,11 @@
         <h1 class="happening-today__heading">{{ happeningTodayS.todaySig() | date: 'HH:mm' }}</h1>
         <h2 class="happening-today__subheading">{{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' }}</h2>
 
-        <div *ngIf="happeningTodayS.upcomingMeetingsSig() as upcomingMeetings" class="happening-today__events">
+        <div
+          [@fadeInOut]="upcomingMeetings.length"
+          *ngIf="happeningTodayS.upcomingMeetingsSig() as upcomingMeetings"
+          class="happening-today__events"
+        >
           <app-upcoming-event
             *ngFor="let event of upcomingMeetings | slice: 0 : UPCOMING_EVENTS_LIMIT"
             [description]="event.title"
