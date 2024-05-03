@@ -1,6 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { ERequestState } from '@app/models/enums';
 import { ICalendarItem } from '@cesnet/shongo-calendar';
+import { ERequestState } from '@models/enums';
 import { endOfDay, formatDistance, isWithinInterval } from 'date-fns';
 import { Observable, filter, first, interval, map, startWith, switchMap } from 'rxjs';
 import { ReservationService } from './reservation.service';
@@ -13,7 +13,7 @@ export class HappeningTodayService {
   readonly todaySig = signal(new Date());
   readonly upcomingMeetingsSig = signal<ICalendarItem[]>([]);
   readonly isAvailableSig = computed(() => this._isAvailable(this.upcomingMeetingsSig(), this.todaySig()));
-  readonly nextMeetingSig = computed(() => this._getNextMeeting(this.upcomingMeetingsSig()));
+  readonly nextMeetingSig = computed(() => this._getNextMeeting(this.upcomingMeetingsSig(), this.todaySig()));
   readonly timeToNextMeetingSig = computed(() => this._timeToNextMeeting(this.nextMeetingSig(), this.todaySig()));
 
   constructor(private _reservationS: ReservationService) {
@@ -56,7 +56,7 @@ export class HappeningTodayService {
     return formatDistance(now, nextMeeting.slot.start);
   }
 
-  private _getNextMeeting(meetings: ICalendarItem[]): ICalendarItem | null {
-    return meetings[0] || null;
+  private _getNextMeeting(meetings: ICalendarItem[], now: Date): ICalendarItem | null {
+    return meetings.find((meeting) => meeting.slot.start > now) || null;
   }
 }
