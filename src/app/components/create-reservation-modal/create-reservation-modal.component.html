@@ -1,6 +1,13 @@
 <h1 mat-dialog-title>Create reservation</h1>
 
 <mat-dialog-content class="create-reservation__content">
+  <div class="create-reservation__info">
+    <p class="create-reservation__label">Selected slot:</p>
+    <p class="create-reservation__data">
+      {{ slot.start | date: 'MMM d, y, H:mm' }} - {{ slot.end | date: 'MMM d, y, H:mm' }}
+    </p>
+  </div>
+
   <form [formGroup]="form">
     <mat-form-field class="create-reservation__field" appearance="outline">
       <mat-label>Description</mat-label>

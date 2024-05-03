@@ -25,18 +25,21 @@ export class CreateReservationModalComponent {
     @Inject(MAT_DIALOG_DATA) private _data: { slot: IInterval }
   ) {}
 
+  get slot(): IInterval {
+    return this._data.slot;
+  }
+
   onCreate(): void {
     this.isCreatingSig.set(true);
 
     const description = this.form.value.description;
-    const slot = this._data?.slot;
 
-    if (!slot || !description) {
+    if (!this.slot || !description) {
       throw new Error('Slot or description is not defined');
     }
 
     this._reservationS
-      .createReservation$(slot, description)
+      .createReservation$(this.slot, description)
       .pipe(
         catchError((err) => {
           this._notificationS.error('Failed to create reservation');
