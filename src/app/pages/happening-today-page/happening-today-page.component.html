@@ -7,11 +7,11 @@
     <main class="happening-today__main">
       <img src="/assets/img/logo-cesnet-light.png" alt="CESNET" width="228" height="87" class="happening-today__logo" />
 
-      <div>
+      <div class="happening-today__overview">
         <h1 class="happening-today__heading">
           {{ happeningTodayS.isAvailableSig() ? 'Room Available' : 'Meeting in Progress' }}
         </h1>
-        <h2 class="happening-today__subheading">
+        <h2 class="happening-today__subheading overflow-ellipsis">
           <ng-container *ngIf="happeningTodayS.currentMeetingSig() as currentMeeting; else noCurrentMeeting">
             Meeting ends in {{ happeningTodayS.timeToCurrentMeetingEndSig() }} | {{ currentMeeting.title }}
           </ng-container>

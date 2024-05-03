@@ -77,6 +77,10 @@
     margin-bottom: 1.5rem;
   }
 
+  &__overview {
+    max-width: 100%;
+  }
+
   &__book-now {
     display: flex;
     align-items: center;

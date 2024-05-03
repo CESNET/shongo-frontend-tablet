@@ -27,3 +27,9 @@ body {
 a {
   text-decoration: none;
 }
+
+.overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
