@@ -15,6 +15,10 @@ export class HappeningTodayService {
   readonly isAvailableSig = computed(() => this._isAvailable(this.upcomingMeetingsSig(), this.todaySig()));
   readonly nextMeetingSig = computed(() => this._getNextMeeting(this.upcomingMeetingsSig(), this.todaySig()));
   readonly timeToNextMeetingSig = computed(() => this._timeToNextMeeting(this.nextMeetingSig(), this.todaySig()));
+  readonly currentMeetingSig = computed(() => this._getCurrentMeeting(this.upcomingMeetingsSig(), this.todaySig()));
+  readonly timeToCurrentMeetingEndSig = computed(() =>
+    this._timeToCurrentMeetingEnd(this.currentMeetingSig(), this.todaySig())
+  );
 
   constructor(private _reservationS: ReservationService) {
     this._keepUpdatingToday();
@@ -58,5 +62,16 @@ export class HappeningTodayService {
 
   private _getNextMeeting(meetings: ICalendarItem[], now: Date): ICalendarItem | null {
     return meetings.find((meeting) => meeting.slot.start > now) || null;
+  }
+
+  private _getCurrentMeeting(meetings: ICalendarItem[], now: Date): ICalendarItem | null {
+    return meetings.find((meeting) => isWithinInterval(now, meeting.slot)) || null;
+  }
+
+  private _timeToCurrentMeetingEnd(currentMeeting: ICalendarItem | null, now: Date): string | null {
+    if (!currentMeeting) {
+      return null;
+    }
+    return formatDistance(now, currentMeeting.slot.end);
   }
 }

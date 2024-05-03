@@ -11,16 +11,19 @@
         <h1 class="happening-today__heading">
           {{ happeningTodayS.isAvailableSig() ? 'Room Available' : 'Meeting in Progress' }}
         </h1>
-        <h2
-          *ngIf="happeningTodayS.nextMeetingSig() as nextMeeting; else noMoreMeetings"
-          class="happening-today__subheading"
-        >
-          Next meeting in {{ happeningTodayS.timeToNextMeetingSig() }} | {{ nextMeeting.title }}
-        </h2>
+        <h2 class="happening-today__subheading">
+          <ng-container *ngIf="happeningTodayS.currentMeetingSig() as currentMeeting; else noCurrentMeeting">
+            Meeting ends in {{ happeningTodayS.timeToCurrentMeetingEndSig() }} | {{ currentMeeting.title }}
+          </ng-container>
 
-        <ng-template #noMoreMeetings>
-          <h2 class="happening-today__subheading">No more meetings today</h2>
-        </ng-template>
+          <ng-template #noCurrentMeeting>
+            <ng-container *ngIf="happeningTodayS.nextMeetingSig() as nextMeeting; else noMoreMeetings">
+              Next meeting in {{ happeningTodayS.timeToNextMeetingSig() }} | {{ nextMeeting.title }}
+            </ng-container>
+          </ng-template>
+
+          <ng-template #noMoreMeetings>No more meetings today</ng-template>
+        </h2>
 
         <a routerLink="/reserve">
           <button class="happening-today__book-now">Book Now</button>
