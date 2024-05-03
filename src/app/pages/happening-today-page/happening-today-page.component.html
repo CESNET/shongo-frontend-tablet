@@ -35,14 +35,18 @@
         <h1 class="happening-today__heading">{{ happeningTodayS.todaySig() | date: 'HH:mm' }}</h1>
         <h2 class="happening-today__subheading">{{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' }}</h2>
 
-        <div class="happening-today__events">
+        <div *ngIf="happeningTodayS.upcomingMeetingsSig() as upcomingMeetings" class="happening-today__events">
           <app-upcoming-event
-            *ngFor="let event of happeningTodayS.upcomingMeetingsSig()"
+            *ngFor="let event of upcomingMeetings | slice: 0 : UPCOMING_EVENTS_LIMIT"
             [description]="event.title"
             [start]="event.slot.start"
             [end]="event.slot.end"
             class="happening-today__event"
           ></app-upcoming-event>
+
+          <span *ngIf="getMoreEventsText(upcomingMeetings.length) as moreEventsText">
+            {{ moreEventsText }}
+          </span>
         </div>
       </div>
     </aside>
