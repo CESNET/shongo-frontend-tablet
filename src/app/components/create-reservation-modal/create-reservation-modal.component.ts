@@ -7,11 +7,11 @@ import { IInterval } from '@cesnet/shongo-calendar';
 import { catchError, finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-create-reservation',
-  templateUrl: './create-reservation.component.html',
-  styleUrls: ['./create-reservation.component.scss']
+  selector: 'app-create-reservation-modal',
+  templateUrl: './create-reservation-modal.component.html',
+  styleUrls: ['./create-reservation-modal.component.scss']
 })
-export class CreateReservationComponent {
+export class CreateReservationModalComponent {
   readonly form = this._fb.group({
     description: ['', Validators.required]
   });
@@ -20,7 +20,7 @@ export class CreateReservationComponent {
   constructor(
     private _fb: FormBuilder,
     private _reservationS: ReservationService,
-    private _dialogRef: MatDialogRef<CreateReservationComponent>,
+    private _dialogRef: MatDialogRef<CreateReservationModalComponent>,
     private _notificationS: NotificationService,
     @Inject(MAT_DIALOG_DATA) private _data: { slot: IInterval }
   ) {}

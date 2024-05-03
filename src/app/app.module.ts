@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   CalendarHeaderComponent,
-  CreateReservationComponent,
+  CreateReservationModalComponent,
   DateSelectorComponent,
   LanguageSelectorComponent,
   LoadingOverlayComponent
@@ -35,7 +35,7 @@ import { HappeningTodayPageComponent } from './pages/happening-today-page/happen
     ReservationPageComponent,
     DateSelectorComponent,
     LanguageSelectorComponent,
-    CreateReservationComponent,
+    CreateReservationModalComponent,
     LoadingOverlayComponent,
     TokenModalComponent,
     HappeningTodayPageComponent,
