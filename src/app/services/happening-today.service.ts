@@ -8,9 +8,7 @@ import { ReservationService } from './reservation.service';
 const SECOND_INTERVAL = 1000;
 const UPDATE_INTERVAL = SECOND_INTERVAL * 60 * 5;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HappeningTodayService {
   readonly todaySig = signal(new Date());
   readonly upcomingMeetingsSig = signal<ICalendarItem[]>([]);
