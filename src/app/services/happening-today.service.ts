@@ -1,4 +1,5 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { DestroyRef, Injectable, computed, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ICalendarItem } from '@cesnet/shongo-calendar';
 import { ERequestState } from '@models/enums';
 import { endOfDay, formatDistance, isWithinInterval } from 'date-fns';
@@ -20,7 +21,10 @@ export class HappeningTodayService {
     this._timeToCurrentMeetingEnd(this.currentMeetingSig(), this.todaySig())
   );
 
-  constructor(private _reservationS: ReservationService) {
+  constructor(
+    private _reservationS: ReservationService,
+    private _destroyRef: DestroyRef
+  ) {
     this._keepUpdatingToday();
     this._keepUpcomingMeetingsUpdated();
   }
@@ -29,13 +33,16 @@ export class HappeningTodayService {
     interval(UPDATE_INTERVAL)
       .pipe(
         startWith(0),
-        switchMap(() => this._fetchUpcomingMeetings$())
+        switchMap(() => this._fetchUpcomingMeetings$()),
+        takeUntilDestroyed(this._destroyRef)
       )
       .subscribe((meetings) => this.upcomingMeetingsSig.set(meetings));
   }
 
   private _keepUpdatingToday(): void {
-    interval(SECOND_INTERVAL).subscribe(() => this.todaySig.set(new Date()));
+    interval(SECOND_INTERVAL)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => this.todaySig.set(new Date()));
   }
 
   private _fetchUpcomingMeetings$(): Observable<ICalendarItem[]> {
