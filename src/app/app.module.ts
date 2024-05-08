@@ -27,6 +27,7 @@ import { TokenModalComponent } from './components/token-modal/token-modal.compon
 import { UpcomingEventComponent } from './components/upcoming-event/upcoming-event.component';
 import { ReservationPageComponent } from './pages';
 import { HappeningTodayPageComponent } from './pages/happening-today-page/happening-today-page.component';
+import { EllipsisPipe } from './pipes/ellipsis.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HappeningTodayPageComponent } from './pages/happening-today-page/happen
     LoadingOverlayComponent,
     TokenModalComponent,
     HappeningTodayPageComponent,
-    UpcomingEventComponent
+    UpcomingEventComponent,
+    EllipsisPipe
   ],
   imports: [
     BrowserModule,

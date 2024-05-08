@@ -11,14 +11,14 @@
         <h1 class="happening-today__heading">
           {{ happeningTodayS.isAvailableSig() ? 'Room Available' : 'Meeting in Progress' }}
         </h1>
-        <h2 class="happening-today__subheading overflow-ellipsis">
+        <h2 class="happening-today__subheading">
           <ng-container *ngIf="happeningTodayS.currentMeetingSig() as currentMeeting; else noCurrentMeeting">
-            Meeting ends in {{ happeningTodayS.timeToCurrentMeetingEndSig() }} | {{ currentMeeting.title }}
+            Meeting ends in {{ happeningTodayS.timeToCurrentMeetingEndSig() }} | {{ currentMeeting.title | ellipsis }}
           </ng-container>
 
           <ng-template #noCurrentMeeting>
             <ng-container *ngIf="happeningTodayS.nextMeetingSig() as nextMeeting; else noMoreMeetings">
-              Next meeting in {{ happeningTodayS.timeToNextMeetingSig() }} | {{ nextMeeting.title }}
+              Next meeting in {{ happeningTodayS.timeToNextMeetingSig() }} | {{ nextMeeting.title | ellipsis }}
             </ng-container>
           </ng-template>
 
