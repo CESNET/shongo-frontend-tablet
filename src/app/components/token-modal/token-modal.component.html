@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Enter authentication data for this device</h1>
 
-<form [formGroup]="formGroup" mat-dialog-content class="token-modal__form">
+<form (submit)="save()" [formGroup]="formGroup" mat-dialog-content class="token-modal__form">
   <mat-form-field class="token-modal__field" appearance="outline">
     <mat-label>Authentization token</mat-label>
     <input formControlName="token" matInput />
