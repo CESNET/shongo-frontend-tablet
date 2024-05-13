@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from '@app/services/notification.service';
 import { ReservationService } from '@app/services/reservation.service';
 import { IInterval } from '@cesnet/shongo-calendar';
-import { catchError, finalize } from 'rxjs';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-create-reservation-modal',
@@ -30,6 +30,10 @@ export class CreateReservationModalComponent {
   }
 
   onCreate(): void {
+    if (this.isCreatingSig()) {
+      return;
+    }
+
     this.isCreatingSig.set(true);
 
     const description = this.form.value.description;
@@ -44,14 +48,17 @@ export class CreateReservationModalComponent {
         catchError((err) => {
           this._notificationS.error('Failed to create reservation');
           throw err;
-        }),
-        finalize(() => {
-          this.isCreatingSig.set(false);
         })
       )
-      .subscribe(() => {
-        this._notificationS.success('Reservation created');
-        this._dialogRef.close(true);
+      .subscribe({
+        next: () => {
+          this._notificationS.success('Reservation created');
+          this._dialogRef.close(true);
+          this.isCreatingSig.set(false);
+        },
+        error: () => {
+          this.isCreatingSig.set(false);
+        }
       });
   }
 }
