@@ -5,7 +5,7 @@ import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
 import { ERequestState } from '@models/enums';
 import { IRequest, IReservationRequest } from '@models/interfaces';
 import moment from 'moment';
-import { BehaviorSubject, Observable, catchError, first, iif, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, catchError, first, iif, map, of, switchMap } from 'rxjs';
 import { ApiService } from './api.service';
 import { AuthenticationService } from './authentication.service';
 import { NotificationService } from './notification.service';
@@ -65,7 +65,9 @@ export class ReservationService {
         catchError((err) => {
           console.error(err);
           this._notificationS.error('Failed to fetch reservations');
-          return [];
+          response$.next({ data: [], state: ERequestState.ERROR });
+          response$.complete();
+          return EMPTY;
         })
       )
       .subscribe((reservations) => {
