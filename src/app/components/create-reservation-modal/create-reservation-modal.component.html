@@ -11,8 +11,11 @@
   <form [formGroup]="form" (submit)="onCreate()">
     <mat-form-field class="create-reservation__field" appearance="outline">
       <mat-label>Description</mat-label>
-      <input formControlName="description" matInput type="text" autocomplete="off" spellcheck="false" />
-      <mat-error *ngIf="form.controls.description.invalid">Input is required</mat-error>
+      <input formControlName="description" matInput type="text" autocomplete="off" spellcheck="false" maxlength="100" />
+      <mat-error *ngIf="form.controls.description.errors?.['required']">Input is required</mat-error>
+      <mat-error *ngIf="form.controls.description.errors?.['maxlength']">
+        Description can have max. 150 characters
+      </mat-error>
     </mat-form-field>
   </form>
 
