@@ -1,0 +1,61 @@
+<div class="happening-today">
+  <div class="happening-today__background">
+    <div class="background-filter"></div>
+  </div>
+
+  <div class="happening-today__content">
+    <main class="happening-today__main">
+      <img src="/assets/img/logo-cesnet-light.png" alt="CESNET" width="228" height="87" class="happening-today__logo" />
+
+      <div class="happening-today__overview">
+        <h1 class="happening-today__heading">
+          {{ happeningTodayS.isAvailableSig() ? 'Room Available' : 'Meeting in Progress' }}
+        </h1>
+        <h2 class="happening-today__subheading">
+          <ng-container *ngIf="happeningTodayS.currentMeetingSig() as currentMeeting; else noCurrentMeeting">
+            Meeting ends in {{ happeningTodayS.timeToCurrentMeetingEndSig() }} | {{ currentMeeting.title | ellipsis }}
+          </ng-container>
+
+          <ng-template #noCurrentMeeting>
+            <ng-container *ngIf="happeningTodayS.nextMeetingSig() as nextMeeting; else noMoreMeetings">
+              Next meeting in {{ happeningTodayS.timeToNextMeetingSig() }} | {{ nextMeeting.title | ellipsis }}
+            </ng-container>
+          </ng-template>
+
+          <ng-template #noMoreMeetings>No more meetings today</ng-template>
+        </h2>
+
+        <a routerLink="/reserve">
+          <button class="happening-today__book-now">Book Now</button>
+        </a>
+      </div>
+    </main>
+
+    <aside class="happening-today__sidebar">
+      <div class="background-filter"></div>
+
+      <div class="happening-today__sidebar-content">
+        <h1 class="happening-today__heading">{{ happeningTodayS.todaySig() | date: 'HH:mm' }}</h1>
+        <h2 class="happening-today__subheading">{{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' }}</h2>
+
+        <div
+          [@fadeInOut]="upcomingMeetings.length"
+          *ngIf="happeningTodayS.upcomingMeetingsSig() as upcomingMeetings"
+          class="happening-today__events"
+        >
+          <app-upcoming-event
+            *ngFor="let event of upcomingMeetings | slice: 0 : UPCOMING_EVENTS_LIMIT"
+            [description]="event.title"
+            [start]="event.slot.start"
+            [end]="event.slot.end"
+            class="happening-today__event"
+          ></app-upcoming-event>
+
+          <span *ngIf="getMoreEventsText(upcomingMeetings.length) as moreEventsText">
+            {{ moreEventsText }}
+          </span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

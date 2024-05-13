@@ -1,7 +1,9 @@
-<button *ngIf="calendarS.viewSig() === CalendarView.Day" (mwlClick)="onBackToMonth()" mat-button>
-  <mat-icon>arrow_back</mat-icon>
-  Back to month
-</button>
+<a routerLink="/">
+  <button mat-stroked-button>
+    <mat-icon>arrow_back</mat-icon>
+    Back
+  </button>
+</a>
 
 <button
   #previousButton
@@ -10,11 +12,17 @@
   [viewDate]="calendarS.viewDateSig()"
   mwlCalendarPreviousView
   mat-icon-button
+  class="date-selector__previous"
 >
-  <mat-icon>chevron_left</mat-icon>
+  <mat-icon>arrow_back_ios_new</mat-icon>
 </button>
 
-<button (viewDateChange)="onViewDateChange($event)" [viewDate]="calendarS.viewDateSig()" mwlCalendarToday mat-button>
+<button
+  (viewDateChange)="onViewDateChange($event)"
+  [viewDate]="calendarS.viewDateSig()"
+  mwlCalendarToday
+  mat-stroked-button
+>
   Today
 </button>
 
@@ -26,5 +34,5 @@
   mwlCalendarNextView
   mat-icon-button
 >
-  <mat-icon>chevron_right</mat-icon>
+  <mat-icon>arrow_forward_ios_new</mat-icon>
 </button>

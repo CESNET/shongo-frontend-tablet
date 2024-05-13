@@ -14,27 +14,34 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ShongoCalendarModule } from '@cesnet/shongo-calendar';
 import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from 'src/core/core.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   CalendarHeaderComponent,
-  CreateReservationComponent,
+  CreateReservationModalComponent,
   DateSelectorComponent,
   LanguageSelectorComponent,
   LoadingOverlayComponent
 } from './components';
 import { TokenModalComponent } from './components/token-modal/token-modal.component';
-import { CalendarComponent } from './pages';
+import { UpcomingEventComponent } from './components/upcoming-event/upcoming-event.component';
+import { ReservationPageComponent } from './pages';
+import { HappeningTodayPageComponent } from './pages/happening-today-page/happening-today-page.component';
+import { EllipsisPipe } from './pipes/ellipsis.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarHeaderComponent,
-    CalendarComponent,
+    ReservationPageComponent,
     DateSelectorComponent,
     LanguageSelectorComponent,
-    CreateReservationComponent,
+    CreateReservationModalComponent,
     LoadingOverlayComponent,
-    TokenModalComponent
+    TokenModalComponent,
+    HappeningTodayPageComponent,
+    UpcomingEventComponent,
+    EllipsisPipe
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,8 @@ import { CalendarComponent } from './pages';
     HammerModule,
     CoreModule,
     MatProgressSpinnerModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })

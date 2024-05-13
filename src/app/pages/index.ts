@@ -1,1 +1,1 @@
-export * from './home/home.component';
+export * from './reservation-page/reservation-page.component';

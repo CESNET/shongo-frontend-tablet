@@ -5,11 +5,11 @@ import { IInterval } from '@cesnet/shongo-calendar';
 import { CalendarView } from 'angular-calendar';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-reservation-page',
+  templateUrl: './reservation-page.component.html',
+  styleUrls: ['./reservation-page.component.scss']
 })
-export class CalendarComponent {
+export class ReservationPageComponent {
   selectedSlot: IInterval | null = null;
 
   readonly CalendarView = CalendarView;

@@ -1,0 +1,11 @@
+:host {
+  > * {
+    margin-right: 0.5rem;
+  }
+}
+
+.date-selector {
+  &__previous {
+    margin-left: 1rem;
+  }
+}

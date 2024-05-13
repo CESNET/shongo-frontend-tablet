@@ -1,12 +1,12 @@
 @use '@angular/material' as mat;
 
 $shongo-frontend-tablet-primary: mat.define-palette(mat.$green-palette, A700);
-$shongo-frontend-tablet-accent: mat.define-palette(mat.$blue-grey-palette, 600);
+$shongo-frontend-tablet-accent: mat.define-palette(mat.$grey-palette, A100);
 $shongo-frontend-tablet-warn: mat.define-palette(mat.$red-palette);
 $shongo-typography-config: mat.define-typography-config(
   $body-1: mat.define-typography-level(1rem, 1.2rem, 400),
   $body-2: mat.define-typography-level(1rem, 1.2rem, 400),
-  $button: mat.define-typography-level(0.9rem, 1rem, 500)
+  $button: mat.define-typography-level(1.2rem, 1.3rem, 500)
 );
 $shongo-frontend-tablet-theme: mat.define-light-theme(
   (

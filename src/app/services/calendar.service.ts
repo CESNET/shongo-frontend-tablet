@@ -16,7 +16,7 @@ export class CalendarService {
   readonly nextView$: Observable<void>;
   readonly previousView$: Observable<void>;
 
-  readonly viewSig = signal<CalendarView>(CalendarView.Month);
+  readonly viewSig = signal<CalendarView>(CalendarView.Day);
   readonly viewDateSig = signal<Date>(new Date());
   readonly calendarItemsSig = signal<ICalendarItem[]>([]);
   readonly stateSig = signal<ERequestState>(ERequestState.LOADING);
