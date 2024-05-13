@@ -18,7 +18,7 @@ export class AuthenticationService {
   ) {}
 
   get isAuthenticated(): boolean {
-    return !!this.deviceToken;
+    return !!this.deviceToken && !!this.deviceResource;
   }
 
   get authHeader(): string {
