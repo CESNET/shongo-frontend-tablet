@@ -53,6 +53,9 @@
     position: absolute;
     top: $padding;
     left: $padding;
+    width: 228px;
+    height: 87px;
+    background: url(/assets/img/logo-cesnet-light.png) no-repeat center center/contain;
   }
 
   &__heading {
