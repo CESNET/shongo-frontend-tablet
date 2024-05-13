@@ -7,8 +7,8 @@
 .calendar {
   flex: 1;
   max-height: var(--calendar-height);
-  overflow-y: auto;
   touch-action: pan-y !important;
+  overflow: hidden;
 }
 
 .calendar-header {
