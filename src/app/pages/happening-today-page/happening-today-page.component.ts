@@ -23,7 +23,7 @@ import { HappeningTodayService } from '@app/services/happening-today.service';
   ]
 })
 export class HappeningTodayPageComponent {
-  readonly UPCOMING_EVENTS_LIMIT = 5;
+  readonly UPCOMING_EVENTS_LIMIT = 4;
 
   constructor(public happeningTodayS: HappeningTodayService) {}
 
