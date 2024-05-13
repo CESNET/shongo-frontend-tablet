@@ -34,8 +34,7 @@ export class CreateReservationModalComponent {
       return;
     }
 
-    this.isCreatingSig.set(true);
-
+    this._onCreateStart();
     const description = this.form.value.description;
 
     if (!this.slot || !description) {
@@ -54,11 +53,21 @@ export class CreateReservationModalComponent {
         next: () => {
           this._notificationS.success('Reservation created');
           this._dialogRef.close(true);
-          this.isCreatingSig.set(false);
+          this._onCreateEnd();
         },
         error: () => {
-          this.isCreatingSig.set(false);
+          this._onCreateEnd();
         }
       });
+  }
+
+  private _onCreateStart(): void {
+    this.isCreatingSig.set(true);
+    this._dialogRef.disableClose = true;
+  }
+
+  private _onCreateEnd(): void {
+    this.isCreatingSig.set(false);
+    this._dialogRef.disableClose = false;
   }
 }
