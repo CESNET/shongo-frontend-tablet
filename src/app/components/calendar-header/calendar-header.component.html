@@ -4,6 +4,8 @@
   <button (mwlClick)="onReserve()" [disabled]="!selectedSlot" mat-flat-button color="primary">
     {{ 'HEADER:RESERVE' | translate: i18nS.selectedLocaleValueSig() }}
   </button>
-  <h2>{{ calendarS.viewDateSig() | calendarDate: calendarS.viewSig() + 'ViewTitle' }}</h2>
+  <h2>
+    {{ calendarS.viewDateSig() | calendarDate: calendarS.viewSig() + 'ViewTitle' : i18nS.selectedLocaleValueSig() }}
+  </h2>
   <app-language-selector></app-language-selector>
 </div>
