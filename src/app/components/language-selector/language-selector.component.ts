@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { I18nService } from '@app/services/i18n.service';
 import { LOCALES } from '@models/constants';
 import { ILocaleItem } from '@models/interfaces';
@@ -8,6 +8,8 @@ import { ILocaleItem } from '@models/interfaces';
   templateUrl: './language-selector.component.html'
 })
 export class LanguageSelectorComponent {
+  @Input() isFab = false;
+
   readonly locales = LOCALES;
 
   constructor(public i18nS: I18nService) {}

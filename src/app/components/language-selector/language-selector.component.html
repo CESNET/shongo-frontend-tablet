@@ -1,4 +1,8 @@
-<button mat-fab [matMenuTriggerFor]="languageMenu" color="accent">
+<button *ngIf="isFab" mat-fab [matMenuTriggerFor]="languageMenu" color="accent">
+  <mat-icon [svgIcon]="i18nS.selectedLocaleSig().icon"></mat-icon>
+</button>
+
+<button *ngIf="!isFab" mat-icon-button [matMenuTriggerFor]="languageMenu">
   <mat-icon [svgIcon]="i18nS.selectedLocaleSig().icon"></mat-icon>
 </button>
 
