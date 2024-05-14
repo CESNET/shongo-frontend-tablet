@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { I18nService } from '@app/services';
 import { AuthenticationService } from '@app/services/authentication.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class TokenModalComponent {
   });
 
   constructor(
+    public i18nS: I18nService,
     private _fb: FormBuilder,
     private _authS: AuthenticationService,
     private _dialogRef: MatDialogRef<TokenModalComponent>

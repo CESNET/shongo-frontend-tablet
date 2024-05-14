@@ -1,6 +1,6 @@
 <button mat-stroked-button routerLink="/">
   <mat-icon>arrow_back</mat-icon>
-  Back
+  {{ 'HEADER:BACK' | translate: i18nS.selectedLocaleValueSig() }}
 </button>
 
 <button
@@ -21,7 +21,7 @@
   mwlCalendarToday
   mat-stroked-button
 >
-  Today
+  {{ 'HEADER:TODAY' | translate: i18nS.selectedLocaleValueSig() }}
 </button>
 
 <button

@@ -1,5 +1,6 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { I18nService } from '@app/services';
 import { HappeningTodayService } from '@app/services/happening-today.service';
 
 @Component({
@@ -25,7 +26,10 @@ import { HappeningTodayService } from '@app/services/happening-today.service';
 export class HappeningTodayPageComponent {
   readonly UPCOMING_EVENTS_LIMIT = 4;
 
-  constructor(public happeningTodayS: HappeningTodayService) {}
+  constructor(
+    public happeningTodayS: HappeningTodayService,
+    public i18nS: I18nService
+  ) {}
 
   getMoreEventsText(eventCount: number): string {
     const moreEventsCount = eventCount - this.UPCOMING_EVENTS_LIMIT;

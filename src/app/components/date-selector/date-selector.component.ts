@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CalendarService } from '@app/services';
+import { CalendarService, I18nService } from '@app/services';
 import { CalendarView } from 'angular-calendar';
 
 @Component({
@@ -16,6 +16,7 @@ export class DateSelectorComponent implements AfterViewInit {
 
   constructor(
     public calendarS: CalendarService,
+    public i18nS: I18nService,
     private _destroyRef: DestroyRef
   ) {}
 

@@ -22,6 +22,7 @@
   }
 
   &__main {
+    position: relative;
     display: flex;
     align-items: center;
     width: 70%;
@@ -105,6 +106,12 @@
     transition: all 0.2s;
     user-select: none;
     touch-action: manipulation;
+  }
+
+  &__language {
+    position: absolute;
+    bottom: $padding;
+    left: $padding;
   }
 }
 

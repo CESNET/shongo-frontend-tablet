@@ -1,6 +1,7 @@
 import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { I18nService } from '@app/services';
 import { NotificationService } from '@app/services/notification.service';
 import { ReservationService } from '@app/services/reservation.service';
 import { IInterval } from '@cesnet/shongo-calendar';
@@ -18,6 +19,7 @@ export class CreateReservationModalComponent {
   readonly isCreatingSig = signal(false);
 
   constructor(
+    public i18nS: I18nService,
     private _fb: FormBuilder,
     private _reservationS: ReservationService,
     private _dialogRef: MatDialogRef<CreateReservationModalComponent>,

@@ -1,6 +1,8 @@
 <div class="date-selector" app-date-selector></div>
 
 <div class="calendar-header__right">
-  <button (mwlClick)="onReserve()" [disabled]="!selectedSlot" mat-flat-button color="primary">Reserve</button>
+  <button (mwlClick)="onReserve()" [disabled]="!selectedSlot" mat-flat-button color="primary">
+    {{ 'HEADER:RESERVE' | translate: i18nS.selectedLocaleValueSig() }}
+  </button>
   <h2>{{ calendarS.viewDateSig() | calendarDate: calendarS.viewSig() + 'ViewTitle' }}</h2>
 </div>

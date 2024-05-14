@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CalendarService } from '@app/services';
+import { CalendarService, I18nService } from '@app/services';
 import { ModalHelperService } from '@app/services/modal-helper.service';
 import { IInterval } from '@cesnet/shongo-calendar';
 
@@ -14,6 +14,7 @@ export class CalendarHeaderComponent {
 
   constructor(
     public calendarS: CalendarService,
+    public i18nS: I18nService,
     private _modalHelperS: ModalHelperService
   ) {}
 
