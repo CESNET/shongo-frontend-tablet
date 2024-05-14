@@ -3,8 +3,8 @@ import { ILocale } from './locale.interface';
 export const I18N_EN: ILocale = {
   ['NOW_HAPPENING:ROOM_AVAILABLE']: 'Room Available',
   ['NOW_HAPPENING:ROOM_OCCUPIED']: 'Room Occupied',
-  ['NOW_HAPPENING:MEETING_END_IN']: 'Meeting ends in {PARAM}',
-  ['NOW_HAPPENING:NEXT_MEETING_IN']: 'Next meeting in {PARAM}',
+  ['NOW_HAPPENING:MEETING_END_IN']: 'Meeting ends {PARAM}',
+  ['NOW_HAPPENING:NEXT_MEETING_IN']: 'Next meeting {PARAM}',
   ['NOW_HAPPENING:NO_MORE_MEETINGS']: 'No more meetings today',
   ['NOW_HAPPENING:BOOK_NOW']: 'Book now',
   ['HEADER:RESERVE']: 'Reserve',

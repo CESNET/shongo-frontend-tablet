@@ -3,8 +3,8 @@ import { ILocale } from './locale.interface';
 export const I18N_CS: ILocale = {
   ['NOW_HAPPENING:ROOM_AVAILABLE']: 'Místnost je volná',
   ['NOW_HAPPENING:ROOM_OCCUPIED']: 'Místnost je obsazená',
-  ['NOW_HAPPENING:MEETING_END_IN']: 'Schůzka končí za {PARAM}',
-  ['NOW_HAPPENING:NEXT_MEETING_IN']: 'Další schůzka za {PARAM}',
+  ['NOW_HAPPENING:MEETING_END_IN']: 'Schůzka končí {PARAM}',
+  ['NOW_HAPPENING:NEXT_MEETING_IN']: 'Další schůzka {PARAM}',
   ['NOW_HAPPENING:NO_MORE_MEETINGS']: 'Žádné další schůzky',
   ['NOW_HAPPENING:BOOK_NOW']: 'Rezervovat nyní',
   ['HEADER:RESERVE']: 'Rezervovat',
