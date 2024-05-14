@@ -51,8 +51,12 @@
       <div class="background-filter"></div>
 
       <div class="happening-today__sidebar-content">
-        <h1 class="happening-today__heading">{{ happeningTodayS.todaySig() | date: 'HH:mm' }}</h1>
-        <h2 class="happening-today__subheading">{{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' }}</h2>
+        <h1 class="happening-today__heading">
+          {{ happeningTodayS.todaySig() | date: 'HH:mm' : undefined : i18nS.selectedLocaleValueSig() }}
+        </h1>
+        <h2 class="happening-today__subheading">
+          {{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' : undefined : i18nS.selectedLocaleValueSig() }}
+        </h2>
 
         <div
           [@fadeInOut]="upcomingMeetings.length"
