@@ -28,6 +28,7 @@ import { UpcomingEventComponent } from './components/upcoming-event/upcoming-eve
 import { ReservationPageComponent } from './pages';
 import { HappeningTodayPageComponent } from './pages/happening-today-page/happening-today-page.component';
 import { EllipsisPipe } from './pipes/ellipsis.pipe';
+import { TranslationPipe } from './pipes/translation.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { EllipsisPipe } from './pipes/ellipsis.pipe';
     TokenModalComponent,
     HappeningTodayPageComponent,
     UpcomingEventComponent,
-    EllipsisPipe
+    EllipsisPipe,
+    TranslationPipe
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ import { EllipsisPipe } from './pipes/ellipsis.pipe';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
+  providers: [TranslationPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -4,7 +4,7 @@ import { ILocaleItem } from '@models/interfaces';
 /**
  * Items in locale selection.
  */
-export const locales: ILocaleItem[] = [
+export const LOCALES: ILocaleItem[] = [
   {
     value: ELocale.EN,
     icon: 'flag-en',
@@ -13,6 +13,8 @@ export const locales: ILocaleItem[] = [
   {
     value: ELocale.CS,
     icon: 'flag-cz',
-    name: 'Czech'
+    name: 'Česky'
   }
 ];
+
+export const DEFAULT_LOCALE = LOCALES.find((locale) => locale.value === ELocale.CS)!;

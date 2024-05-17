@@ -5,38 +5,58 @@
 
   <div class="happening-today__content">
     <main class="happening-today__main">
-      <img src="/assets/img/logo-cesnet-light.png" alt="CESNET" width="228" height="87" class="happening-today__logo" />
+      <div class="happening-today__logo"></div>
 
       <div class="happening-today__overview">
         <h1 class="happening-today__heading">
-          {{ happeningTodayS.isAvailableSig() ? 'Room Available' : 'Meeting in Progress' }}
+          {{
+            happeningTodayS.isAvailableSig()
+              ? ('NOW_HAPPENING:ROOM_AVAILABLE' | translate: i18nS.selectedLocaleValueSig())
+              : ('NOW_HAPPENING:ROOM_OCCUPIED' | translate: i18nS.selectedLocaleValueSig())
+          }}
         </h1>
         <h2 class="happening-today__subheading">
           <ng-container *ngIf="happeningTodayS.currentMeetingSig() as currentMeeting; else noCurrentMeeting">
-            Meeting ends in {{ happeningTodayS.timeToCurrentMeetingEndSig() }} | {{ currentMeeting.title | ellipsis }}
+            {{
+              'NOW_HAPPENING:MEETING_END_IN'
+                | translate: i18nS.selectedLocaleValueSig() : happeningTodayS.timeToCurrentMeetingEndSig()!
+            }}
+            | {{ currentMeeting.title | ellipsis }}
           </ng-container>
 
           <ng-template #noCurrentMeeting>
             <ng-container *ngIf="happeningTodayS.nextMeetingSig() as nextMeeting; else noMoreMeetings">
-              Next meeting in {{ happeningTodayS.timeToNextMeetingSig() }} | {{ nextMeeting.title | ellipsis }}
+              {{
+                'NOW_HAPPENING:NEXT_MEETING_IN'
+                  | translate: i18nS.selectedLocaleValueSig() : happeningTodayS.timeToNextMeetingSig()!
+              }}
+              | {{ nextMeeting.title | ellipsis }}
             </ng-container>
           </ng-template>
 
-          <ng-template #noMoreMeetings>No more meetings today</ng-template>
+          <ng-template #noMoreMeetings>
+            {{ 'NOW_HAPPENING:NO_MORE_MEETINGS' | translate: i18nS.selectedLocaleValueSig() }}
+          </ng-template>
         </h2>
 
-        <a routerLink="/reserve">
-          <button class="happening-today__book-now">Book Now</button>
-        </a>
+        <button routerLink="/reserve" class="happening-today__book-now">
+          {{ 'NOW_HAPPENING:BOOK_NOW' | translate: i18nS.selectedLocaleValueSig() }}
+        </button>
       </div>
+
+      <app-language-selector [isFab]="true" class="happening-today__language"></app-language-selector>
     </main>
 
     <aside class="happening-today__sidebar">
       <div class="background-filter"></div>
 
       <div class="happening-today__sidebar-content">
-        <h1 class="happening-today__heading">{{ happeningTodayS.todaySig() | date: 'HH:mm' }}</h1>
-        <h2 class="happening-today__subheading">{{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' }}</h2>
+        <h1 class="happening-today__heading">
+          {{ happeningTodayS.todaySig() | date: 'HH:mm' : undefined : i18nS.selectedLocaleValueSig() }}
+        </h1>
+        <h2 class="happening-today__subheading">
+          {{ happeningTodayS.todaySig() | date: 'EEEE, LLL d' : undefined : i18nS.selectedLocaleValueSig() }}
+        </h2>
 
         <div
           [@fadeInOut]="upcomingMeetings.length"

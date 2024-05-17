@@ -1,8 +1,8 @@
 import { DestroyRef, Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ICalendarItem } from '@cesnet/shongo-calendar';
+import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
 import { ERequestState } from '@models/enums';
-import { endOfDay, formatDistance, isWithinInterval } from 'date-fns';
+import moment from 'moment';
 import { Observable, filter, first, interval, map, startWith, switchMap } from 'rxjs';
 import { ReservationService } from './reservation.service';
 
@@ -15,11 +15,9 @@ export class HappeningTodayService {
   readonly upcomingMeetingsSig = signal<ICalendarItem[]>([]);
   readonly isAvailableSig = computed(() => this._isAvailable(this.upcomingMeetingsSig(), this.todaySig()));
   readonly nextMeetingSig = computed(() => this._getNextMeeting(this.upcomingMeetingsSig(), this.todaySig()));
-  readonly timeToNextMeetingSig = computed(() => this._timeToNextMeeting(this.nextMeetingSig(), this.todaySig()));
+  readonly timeToNextMeetingSig = computed(() => this._timeToNextMeeting(this.nextMeetingSig()));
   readonly currentMeetingSig = computed(() => this._getCurrentMeeting(this.upcomingMeetingsSig(), this.todaySig()));
-  readonly timeToCurrentMeetingEndSig = computed(() =>
-    this._timeToCurrentMeetingEnd(this.currentMeetingSig(), this.todaySig())
-  );
+  readonly timeToCurrentMeetingEndSig = computed(() => this._timeToCurrentMeetingEnd(this.currentMeetingSig()));
 
   constructor(
     private _reservationS: ReservationService,
@@ -47,7 +45,7 @@ export class HappeningTodayService {
 
   private _fetchUpcomingMeetings$(): Observable<ICalendarItem[]> {
     const now = this.todaySig();
-    const endOfToday = endOfDay(now);
+    const endOfToday = moment(now).endOf('day').toDate();
 
     return this._reservationS.fetchInterval$({ start: now, end: endOfToday }).pipe(
       filter((res) => res.state !== ERequestState.LOADING),
@@ -57,14 +55,14 @@ export class HappeningTodayService {
   }
 
   private _isAvailable(meetings: ICalendarItem[], now: Date): boolean {
-    return !meetings.some((meeting) => isWithinInterval(now, meeting.slot));
+    return !meetings.some((meeting) => this._isWithinInterval(now, meeting.slot));
   }
 
-  private _timeToNextMeeting(nextMeeting: ICalendarItem | null, now: Date): string | null {
+  private _timeToNextMeeting(nextMeeting: ICalendarItem | null): string | null {
     if (!nextMeeting) {
       return null;
     }
-    return formatDistance(now, nextMeeting.slot.start);
+    return this._formatDistanceFromNow(nextMeeting.slot.start);
   }
 
   private _getNextMeeting(meetings: ICalendarItem[], now: Date): ICalendarItem | null {
@@ -72,13 +70,25 @@ export class HappeningTodayService {
   }
 
   private _getCurrentMeeting(meetings: ICalendarItem[], now: Date): ICalendarItem | null {
-    return meetings.find((meeting) => isWithinInterval(now, meeting.slot)) || null;
+    return meetings.find((meeting) => this._isWithinInterval(now, meeting.slot)) || null;
   }
 
-  private _timeToCurrentMeetingEnd(currentMeeting: ICalendarItem | null, now: Date): string | null {
+  private _timeToCurrentMeetingEnd(currentMeeting: ICalendarItem | null): string | null {
     if (!currentMeeting) {
       return null;
     }
-    return formatDistance(now, currentMeeting.slot.end);
+    return this._formatDistanceFromNow(currentMeeting.slot.end);
+  }
+
+  private _isWithinInterval(date: Date, interval: IInterval): boolean {
+    const now = moment(date);
+    const start = moment(interval.start);
+    const end = moment(interval.end);
+
+    return now.isBetween(start, end);
+  }
+
+  private _formatDistanceFromNow(end: Date): string {
+    return moment(end).fromNow();
   }
 }

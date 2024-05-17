@@ -9,9 +9,7 @@ import { ReservationService } from './reservation.service';
 
 const RELOAD_INTERVAL_MIN = 5;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CalendarService {
   readonly nextView$: Observable<void>;
   readonly previousView$: Observable<void>;

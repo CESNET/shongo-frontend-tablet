@@ -1,9 +1,7 @@
-<a routerLink="/">
-  <button mat-stroked-button>
-    <mat-icon>arrow_back</mat-icon>
-    Back
-  </button>
-</a>
+<button mat-stroked-button routerLink="/">
+  <mat-icon>arrow_back</mat-icon>
+  {{ 'HEADER:BACK' | translate: i18nS.selectedLocaleValueSig() }}
+</button>
 
 <button
   #previousButton
@@ -23,7 +21,7 @@
   mwlCalendarToday
   mat-stroked-button
 >
-  Today
+  {{ 'HEADER:TODAY' | translate: i18nS.selectedLocaleValueSig() }}
 </button>
 
 <button

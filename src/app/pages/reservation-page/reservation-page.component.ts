@@ -7,7 +7,8 @@ import { CalendarView } from 'angular-calendar';
 @Component({
   selector: 'app-reservation-page',
   templateUrl: './reservation-page.component.html',
-  styleUrls: ['./reservation-page.component.scss']
+  styleUrls: ['./reservation-page.component.scss'],
+  providers: [CalendarService]
 })
 export class ReservationPageComponent {
   selectedSlot: IInterval | null = null;

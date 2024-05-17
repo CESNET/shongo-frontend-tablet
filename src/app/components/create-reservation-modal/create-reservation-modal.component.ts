@@ -1,10 +1,12 @@
 import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslationPipe } from '@app/pipes/translation.pipe';
+import { I18nService } from '@app/services';
 import { NotificationService } from '@app/services/notification.service';
 import { ReservationService } from '@app/services/reservation.service';
 import { IInterval } from '@cesnet/shongo-calendar';
-import { catchError, finalize } from 'rxjs';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-create-reservation-modal',
@@ -18,10 +20,12 @@ export class CreateReservationModalComponent {
   readonly isCreatingSig = signal(false);
 
   constructor(
+    public i18nS: I18nService,
     private _fb: FormBuilder,
     private _reservationS: ReservationService,
     private _dialogRef: MatDialogRef<CreateReservationModalComponent>,
     private _notificationS: NotificationService,
+    private _translationP: TranslationPipe,
     @Inject(MAT_DIALOG_DATA) private _data: { slot: IInterval }
   ) {}
 
@@ -30,8 +34,11 @@ export class CreateReservationModalComponent {
   }
 
   onCreate(): void {
-    this.isCreatingSig.set(true);
+    if (this.isCreatingSig()) {
+      return;
+    }
 
+    this._onCreateStart();
     const description = this.form.value.description;
 
     if (!this.slot || !description) {
@@ -42,16 +49,33 @@ export class CreateReservationModalComponent {
       .createReservation$(this.slot, description)
       .pipe(
         catchError((err) => {
-          this._notificationS.error('Failed to create reservation');
+          this._notificationS.error(
+            this._translationP.transform('NOTIFICATION:RESERVATION_ERROR', this.i18nS.selectedLocaleValueSig())
+          );
           throw err;
-        }),
-        finalize(() => {
-          this.isCreatingSig.set(false);
         })
       )
-      .subscribe(() => {
-        this._notificationS.success('Reservation created');
-        this._dialogRef.close(true);
+      .subscribe({
+        next: () => {
+          this._notificationS.success(
+            this._translationP.transform('NOTIFICATION:RESERVATION_CREATED', this.i18nS.selectedLocaleValueSig())
+          );
+          this._dialogRef.close(true);
+          this._onCreateEnd();
+        },
+        error: () => {
+          this._onCreateEnd();
+        }
       });
+  }
+
+  private _onCreateStart(): void {
+    this.isCreatingSig.set(true);
+    this._dialogRef.disableClose = true;
+  }
+
+  private _onCreateEnd(): void {
+    this.isCreatingSig.set(false);
+    this._dialogRef.disableClose = false;
   }
 }

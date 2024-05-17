@@ -1,14 +1,20 @@
-<h1 mat-dialog-title>Enter authentication data for this device</h1>
+<h1 mat-dialog-title>{{ 'TOKEN_MODAL:TITLE' | translate: i18nS.selectedLocaleValueSig() }}</h1>
 
-<form [formGroup]="formGroup" mat-dialog-content class="token-modal__form">
+<form (submit)="save()" [formGroup]="formGroup" mat-dialog-content class="token-modal__form">
   <mat-form-field class="token-modal__field" appearance="outline">
-    <mat-label>Authentization token</mat-label>
+    <mat-label>{{ 'TOKEN_MODAL:TOKEN' | translate: i18nS.selectedLocaleValueSig() }}</mat-label>
     <input formControlName="token" matInput />
-    <mat-error *ngIf="tokenControl.errors?.['required']">Token is required</mat-error>
-    <mat-error *ngIf="tokenControl.errors?.['invalidToken']">Token is invalid</mat-error>
+    <mat-error *ngIf="tokenControl.errors?.['required']">
+      {{ 'TOKEN_MODAL:ERROR:REQUIRED' | translate: i18nS.selectedLocaleValueSig() }}
+    </mat-error>
+    <mat-error *ngIf="tokenControl.errors?.['invalidToken']">
+      {{ 'TOKEN_MODAL:ERROR:INVALID' | translate: i18nS.selectedLocaleValueSig() }}
+    </mat-error>
   </mat-form-field>
 </form>
 
 <div mat-dialog-actions [align]="'end'">
-  <button (mwlClick)="save()" [disabled]="formGroup.invalid" mat-flat-button color="primary">Save</button>
+  <button (mwlClick)="save()" [disabled]="formGroup.invalid" mat-flat-button color="primary">
+    {{ 'TOKEN_MODAL:SAVE' | translate: i18nS.selectedLocaleValueSig() }}
+  </button>
 </div>
