@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { I18nService } from '@app/services';
@@ -7,7 +7,8 @@ import { AuthenticationService } from '@app/services/authentication.service';
 @Component({
   selector: 'app-token-modal',
   templateUrl: './token-modal.component.html',
-  styleUrls: ['./token-modal.component.scss']
+  styleUrls: ['./token-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TokenModalComponent {
   readonly formGroup = this._fb.group({

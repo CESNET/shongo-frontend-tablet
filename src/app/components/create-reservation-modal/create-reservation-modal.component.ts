@@ -1,4 +1,4 @@
-import { Component, Inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslationPipe } from '@app/pipes/translation.pipe';
@@ -11,7 +11,8 @@ import { catchError } from 'rxjs';
 @Component({
   selector: 'app-create-reservation-modal',
   templateUrl: './create-reservation-modal.component.html',
-  styleUrls: ['./create-reservation-modal.component.scss']
+  styleUrls: ['./create-reservation-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateReservationModalComponent {
   readonly form = this._fb.group({

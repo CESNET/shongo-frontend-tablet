@@ -17,7 +17,7 @@
     [allowSlotSelection]="true"
     [fill]="true"
     [items]="calendarS.calendarItemsSig()"
-    [loading]="calendarS.stateSig() === ERequestState.LOADING"
+    [loading]="isLoadingSig()"
     [mobileDevice]="true"
     [allowOverlappingEvents]="false"
   ></shongo-calendar>

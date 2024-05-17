@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CalendarService, I18nService } from '@app/services';
 import { CalendarView } from 'angular-calendar';
@@ -6,7 +6,8 @@ import { CalendarView } from 'angular-calendar';
 @Component({
   selector: 'div[app-date-selector]',
   templateUrl: './date-selector.component.html',
-  styleUrls: ['./date-selector.component.scss']
+  styleUrls: ['./date-selector.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DateSelectorComponent implements AfterViewInit {
   @ViewChild('nextButton', { static: true, read: ElementRef }) nextButton!: ElementRef<HTMLButtonElement>;

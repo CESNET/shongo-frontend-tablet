@@ -1,5 +1,5 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { I18nService } from '@app/services';
 import { HappeningTodayService } from '@app/services/happening-today.service';
 
@@ -7,6 +7,7 @@ import { HappeningTodayService } from '@app/services/happening-today.service';
   selector: 'app-happening-today-page',
   templateUrl: './happening-today-page.component.html',
   styleUrls: ['./happening-today-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [HappeningTodayService],
   animations: [
     trigger('fadeInOut', [
