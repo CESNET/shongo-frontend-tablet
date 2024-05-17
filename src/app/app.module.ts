@@ -64,6 +64,7 @@ import { TranslationPipe } from './pipes/translation.pipe';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
+  providers: [TranslationPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

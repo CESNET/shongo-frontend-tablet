@@ -1,6 +1,7 @@
 import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TranslationPipe } from '@app/pipes/translation.pipe';
 import { I18nService } from '@app/services';
 import { NotificationService } from '@app/services/notification.service';
 import { ReservationService } from '@app/services/reservation.service';
@@ -24,6 +25,7 @@ export class CreateReservationModalComponent {
     private _reservationS: ReservationService,
     private _dialogRef: MatDialogRef<CreateReservationModalComponent>,
     private _notificationS: NotificationService,
+    private _translationP: TranslationPipe,
     @Inject(MAT_DIALOG_DATA) private _data: { slot: IInterval }
   ) {}
 
@@ -47,13 +49,17 @@ export class CreateReservationModalComponent {
       .createReservation$(this.slot, description)
       .pipe(
         catchError((err) => {
-          this._notificationS.error('Failed to create reservation');
+          this._notificationS.error(
+            this._translationP.transform('NOTIFICATION:RESERVATION_ERROR', this.i18nS.selectedLocaleValueSig())
+          );
           throw err;
         })
       )
       .subscribe({
         next: () => {
-          this._notificationS.success('Reservation created');
+          this._notificationS.success(
+            this._translationP.transform('NOTIFICATION:RESERVATION_CREATED', this.i18nS.selectedLocaleValueSig())
+          );
           this._dialogRef.close(true);
           this._onCreateEnd();
         },

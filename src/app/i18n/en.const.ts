@@ -21,5 +21,8 @@ export const I18N_EN: ILocale = {
   ['TOKEN_MODAL:TOKEN']: 'Authentization token',
   ['TOKEN_MODAL:ERROR:REQUIRED']: 'Token is required',
   ['TOKEN_MODAL:ERROR:INVALID']: 'Token is invalid',
-  ['TOKEN_MODAL:SAVE']: 'Save'
+  ['TOKEN_MODAL:SAVE']: 'Save',
+  ['NOTIFICATION:RESERVATION_CREATED']: 'Reservation created',
+  ['NOTIFICATION:RESERVATION_ERROR']: 'Failed to create reservation',
+  ['NOTIFICATION:FETCH_RESERVATIONS_ERROR']: 'Failed to fetch reservations'
 };

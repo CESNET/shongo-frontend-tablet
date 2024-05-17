@@ -6,7 +6,8 @@
       {{ 'CREATE_RESERVATION:SELECTED_SLOT' | translate: i18nS.selectedLocaleValueSig() }}
     </p>
     <p class="create-reservation__data">
-      {{ slot.start | date: 'MMM d, y, H:mm' }} - {{ slot.end | date: 'MMM d, y, H:mm' }}
+      {{ slot.start | date: 'MMM d, y, H:mm' : undefined : i18nS.selectedLocaleValueSig() }} -
+      {{ slot.end | date: 'MMM d, y, H:mm' : undefined : i18nS.selectedLocaleValueSig() }}
     </p>
   </div>
 

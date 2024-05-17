@@ -21,5 +21,8 @@ export const I18N_CS: ILocale = {
   ['TOKEN_MODAL:TOKEN']: 'Autentizační token',
   ['TOKEN_MODAL:ERROR:REQUIRED']: 'Token je povinný',
   ['TOKEN_MODAL:ERROR:INVALID']: 'Token je neplatný',
-  ['TOKEN_MODAL:SAVE']: 'Uložit'
+  ['TOKEN_MODAL:SAVE']: 'Uložit',
+  ['NOTIFICATION:RESERVATION_CREATED']: 'Rezervace vytvořena',
+  ['NOTIFICATION:RESERVATION_ERROR']: 'Chyba při vytváření rezervace',
+  ['NOTIFICATION:FETCH_RESERVATIONS_ERROR']: 'Chyba při načítání rezervací'
 };

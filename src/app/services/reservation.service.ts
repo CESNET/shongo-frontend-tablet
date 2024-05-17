@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IApiResponse } from '@app/models/interfaces/api-response.interface';
+import { TranslationPipe } from '@app/pipes/translation.pipe';
 import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
 import { ERequestState } from '@models/enums';
 import { IRequest, IReservationRequest } from '@models/interfaces';
@@ -8,6 +9,7 @@ import moment from 'moment';
 import { BehaviorSubject, EMPTY, Observable, catchError, first, iif, map, of, switchMap } from 'rxjs';
 import { ApiService } from './api.service';
 import { AuthenticationService } from './authentication.service';
+import { I18nService } from './i18n.service';
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -17,7 +19,9 @@ export class ReservationService {
   constructor(
     private _apiS: ApiService,
     private _notificationS: NotificationService,
-    private _authS: AuthenticationService
+    private _authS: AuthenticationService,
+    private _i18nS: I18nService,
+    private _translationP: TranslationPipe
   ) {}
 
   createReservation$(slot: IInterval, description: string): Observable<{ id: string }> {
@@ -64,7 +68,9 @@ export class ReservationService {
         map((reservations) => reservations.items.map((res) => this._createCalendarItem(res))),
         catchError((err) => {
           console.error(err);
-          this._notificationS.error('Failed to fetch reservations');
+          this._notificationS.error(
+            this._translationP.transform('NOTIFICATION:FETCH_RESERVATIONS_ERROR', this._i18nS.selectedLocaleValueSig())
+          );
           response$.next({ data: [], state: ERequestState.ERROR });
           response$.complete();
           return EMPTY;
