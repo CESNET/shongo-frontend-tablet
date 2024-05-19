@@ -1,0 +1,36 @@
+<button mat-stroked-button routerLink="/">
+  <mat-icon>arrow_back</mat-icon>
+  {{ 'HEADER:BACK' | translate: i18nS.selectedLocaleValueSig() }}
+</button>
+
+<button
+  #previousButton
+  (viewDateChange)="onViewDateChange($event)"
+  [view]="calendarS.viewSig()"
+  [viewDate]="calendarS.viewDateSig()"
+  mwlCalendarPreviousView
+  mat-icon-button
+  class="date-selector__previous"
+>
+  <mat-icon>arrow_back_ios_new</mat-icon>
+</button>
+
+<button
+  (viewDateChange)="onViewDateChange($event)"
+  [viewDate]="calendarS.viewDateSig()"
+  mwlCalendarToday
+  mat-stroked-button
+>
+  {{ 'HEADER:TODAY' | translate: i18nS.selectedLocaleValueSig() }}
+</button>
+
+<button
+  #nextButton
+  (viewDateChange)="onViewDateChange($event)"
+  [view]="calendarS.viewSig()"
+  [viewDate]="calendarS.viewDateSig()"
+  mwlCalendarNextView
+  mat-icon-button
+>
+  <mat-icon>arrow_forward_ios_new</mat-icon>
+</button>

@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>{{ 'CREATE_RESERVATION:TITLE' | translate: i18nS.selectedLocaleValueSig() }}</h1>
+
+<mat-dialog-content class="create-reservation__content">
+  <div class="create-reservation__info">
+    <p class="create-reservation__label">
+      {{ 'CREATE_RESERVATION:SELECTED_SLOT' | translate: i18nS.selectedLocaleValueSig() }}
+    </p>
+    <p class="create-reservation__data">
+      {{ slot.start | date: 'MMM d, y, H:mm' : undefined : i18nS.selectedLocaleValueSig() }} -
+      {{ slot.end | date: 'MMM d, y, H:mm' : undefined : i18nS.selectedLocaleValueSig() }}
+    </p>
+  </div>
+
+  <form [formGroup]="form" (submit)="onCreate()">
+    <mat-form-field class="create-reservation__field" appearance="outline">
+      <mat-label>{{ 'CREATE_RESERVATION:DESCRIPTION' | translate: i18nS.selectedLocaleValueSig() }}</mat-label>
+      <input formControlName="description" matInput type="text" autocomplete="off" spellcheck="false" maxlength="100" />
+      <mat-error *ngIf="form.controls.description.errors?.['required']">
+        {{ 'CREATE_RESERVATION:ERROR:REQUIRED' | translate: i18nS.selectedLocaleValueSig() }}
+      </mat-error>
+      <mat-error *ngIf="form.controls.description.errors?.['maxlength']">
+        {{ 'CREATE_RESERVATION:ERROR:MAX_LENGTH' | translate: i18nS.selectedLocaleValueSig() }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <app-loading-overlay *ngIf="isCreatingSig()"></app-loading-overlay>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <button [disabled]="isCreatingSig()" mat-button mat-dialog-close type="button">
+    {{ 'CREATE_RESERVATION:CANCEL' | translate: i18nS.selectedLocaleValueSig() }}
+  </button>
+  <button
+    (click)="onCreate()"
+    [disabled]="form.invalid || isCreatingSig()"
+    type="submit"
+    mat-flat-button
+    cdkFocusInitial
+    color="primary"
+  >
+    {{ 'CREATE_RESERVATION:CREATE' | translate: i18nS.selectedLocaleValueSig() }}
+  </button>
+</mat-dialog-actions>

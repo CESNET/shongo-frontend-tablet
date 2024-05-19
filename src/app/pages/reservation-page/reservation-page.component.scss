@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.calendar {
+  flex: 1;
+  max-height: var(--calendar-height);
+  touch-action: pan-y !important;
+  overflow: hidden;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: var(--header-height);
+  padding: 0 var(--spacer-3);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--background-color);
+}

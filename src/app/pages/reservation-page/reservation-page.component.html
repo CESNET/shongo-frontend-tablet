@@ -1,0 +1,24 @@
+<header
+  (reservationCreated)="calendar.clearSelectedSlot()"
+  [selectedSlot]="selectedSlot"
+  class="calendar-header"
+  app-calendar-header
+></header>
+
+<main (swipeleft)="calendarS.nextView()" (swiperight)="calendarS.previousView()" class="calendar">
+  <shongo-calendar
+    #calendar
+    (viewChange)="calendarS.setView($event)"
+    (viewDateChange)="calendarS.setViewDate($event)"
+    (slotSelected)="onSlotSelected($event)"
+    (loadData)="calendarS.loadInterval($event)"
+    [view]="calendarS.viewSig()"
+    [viewDate]="calendarS.viewDateSig()"
+    [allowSlotSelection]="true"
+    [fill]="true"
+    [items]="calendarS.calendarItemsSig()"
+    [loading]="calendarS.stateSig() === ERequestState.LOADING"
+    [mobileDevice]="true"
+    [allowOverlappingEvents]="false"
+  ></shongo-calendar>
+</main>

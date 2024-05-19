@@ -1,12 +1,24 @@
 :root {
-    // Color values
-    --white: #fff;
-    --light-gray: #e1e1e1;
+  // Color values
+  --white: #fff;
+  --gray-100: #e1e1e1;
+  --gray-200: #cfcfcf;
+  --gray-300: #b1b1b1;
+  --gray-400: #8e8e8e;
+  --gray-500: #6e6e6e;
+  --gray-600: #4f4f4f;
 
-    // Semantic colors
-    --border-color: var(--light-gray);
-    --background-color: var(--white);
+  // Semantic colors
+  --border-color: var(--gray-100);
+  --background-color: var(--white);
 
-    // Sizes
-    --header-height: 4em;
+  // Sizes
+  --header-height: 5rem;
+
+  // Spacers
+  --spacer-1: 0.25rem;
+  --spacer-2: 0.5rem;
+  --spacer-3: 1rem;
+  --spacer-4: 1.5rem;
+  --spacer-5: 2rem;
 }
