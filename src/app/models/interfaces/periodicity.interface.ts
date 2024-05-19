@@ -1,4 +1,5 @@
-import { EDays, EMonthlyPeriodicityType, EPeriodicityType } from '../enums';
+import { EDays } from '../enums/days.enum';
+import { EMonthlyPeriodicityType, EPeriodicityType } from '../enums/periodicity-type.enum';
 
 export interface IPeriodicity {
   type: EPeriodicityType;

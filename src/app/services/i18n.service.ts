@@ -1,6 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { DEFAULT_LOCALE } from '@app/models/constants';
-import { ILocaleItem } from '@app/models/interfaces';
+import { DEFAULT_LOCALE } from '@app/models/constants/locales.const';
+import { ILocaleItem } from '@app/models/interfaces/locale-item.interface';
 import * as moment from 'moment';
 
 @Injectable({

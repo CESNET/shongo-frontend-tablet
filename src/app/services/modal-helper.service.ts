@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateReservationModalComponent, TokenModalComponent } from '@app/components';
+import { CreateReservationModalComponent } from '@app/components/create-reservation-modal/create-reservation-modal.component';
+import { TokenModalComponent } from '@app/components/token-modal/token-modal.component';
 import { IInterval } from '@cesnet/shongo-calendar';
 import { Observable } from 'rxjs';
 

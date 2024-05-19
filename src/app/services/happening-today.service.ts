@@ -1,7 +1,7 @@
 import { DestroyRef, Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
-import { ERequestState } from '@models/enums';
+import { ERequestState } from '@models/enums/request-state.enum';
 import moment from 'moment';
 import { Observable, filter, first, interval, map, startWith, switchMap } from 'rxjs';
 import { ReservationService } from './reservation.service';

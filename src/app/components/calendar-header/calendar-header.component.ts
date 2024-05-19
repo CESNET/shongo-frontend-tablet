@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CalendarService, I18nService } from '@app/services';
+import { CalendarService } from '@app/services/calendar.service';
+import { I18nService } from '@app/services/i18n.service';
 import { ModalHelperService } from '@app/services/modal-helper.service';
 import { IInterval } from '@cesnet/shongo-calendar';
 

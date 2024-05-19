@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ELocale } from '@app/models/enums';
-import { I18nService } from '@app/services';
+import { ELocale } from '@app/models/enums/locale.enum';
+import { I18nService } from '@app/services/i18n.service';
 import { ICalendarI18n, ICalendarTranslations } from '@cesnet/shongo-calendar';
 
 @Injectable()

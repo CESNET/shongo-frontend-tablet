@@ -16,17 +16,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { CoreModule } from 'src/core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {
-  CalendarHeaderComponent,
-  CreateReservationModalComponent,
-  DateSelectorComponent,
-  LanguageSelectorComponent,
-  LoadingOverlayComponent
-} from './components';
+import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
+import { CreateReservationModalComponent } from './components/create-reservation-modal/create-reservation-modal.component';
+import { DateSelectorComponent } from './components/date-selector/date-selector.component';
+import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
+import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { TokenModalComponent } from './components/token-modal/token-modal.component';
 import { UpcomingEventComponent } from './components/upcoming-event/upcoming-event.component';
-import { ReservationPageComponent } from './pages';
 import { HappeningTodayPageComponent } from './pages/happening-today-page/happening-today-page.component';
+import { ReservationPageComponent } from './pages/reservation-page/reservation-page.component';
 import { EllipsisPipe } from './pipes/ellipsis.pipe';
 import { TranslationPipe } from './pipes/translation.pipe';
 

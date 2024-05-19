@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { I18nService } from '@app/services';
 import { AuthenticationService } from '@app/services/authentication.service';
+import { I18nService } from '@app/services/i18n.service';
 
 @Component({
   selector: 'app-token-modal',

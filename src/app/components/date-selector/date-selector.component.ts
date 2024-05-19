@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CalendarService, I18nService } from '@app/services';
+import { CalendarService } from '@app/services/calendar.service';
+import { I18nService } from '@app/services/i18n.service';
 import { CalendarView } from 'angular-calendar';
 
 @Component({

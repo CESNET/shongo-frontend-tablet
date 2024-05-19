@@ -1,6 +1,6 @@
 import { Component, Signal, computed } from '@angular/core';
-import { ERequestState } from '@app/models/enums';
-import { CalendarService } from '@app/services';
+import { ERequestState } from '@app/models/enums/request-state.enum';
+import { CalendarService } from '@app/services/calendar.service';
 import { IInterval } from '@cesnet/shongo-calendar';
 import { CalendarView } from 'angular-calendar';
 

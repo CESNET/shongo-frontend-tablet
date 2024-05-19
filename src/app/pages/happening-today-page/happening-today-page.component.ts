@@ -1,7 +1,7 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { I18nService } from '@app/services';
 import { HappeningTodayService } from '@app/services/happening-today.service';
+import { I18nService } from '@app/services/i18n.service';
 
 @Component({
   selector: 'app-happening-today-page',

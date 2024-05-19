@@ -1,11 +1,11 @@
 import { DestroyRef, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ERequestState } from '@app/models/enums';
-import { IRequest } from '@app/models/interfaces';
+import { ERequestState } from '@app/models/enums/request-state.enum';
+import { IRequest } from '@app/models/interfaces/request.interface';
 import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
 import { CalendarView } from 'angular-calendar';
 import { EMPTY, Observable, Subject, Subscription, catchError, filter, interval, switchMap, tap } from 'rxjs';
-import { AuthenticationService } from '.';
+import { AuthenticationService } from './authentication.service';
 import { ReservationService } from './reservation.service';
 
 const RELOAD_INTERVAL_MIN = 5;

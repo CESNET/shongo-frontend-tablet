@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject, signal } from '@angular/cor
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslationPipe } from '@app/pipes/translation.pipe';
-import { I18nService } from '@app/services';
+import { I18nService } from '@app/services/i18n.service';
 import { NotificationService } from '@app/services/notification.service';
 import { ReservationService } from '@app/services/reservation.service';
 import { IInterval } from '@cesnet/shongo-calendar';

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { I18nService } from '@app/services/i18n.service';
-import { LOCALES } from '@models/constants';
-import { ILocaleItem } from '@models/interfaces';
+import { LOCALES } from '@models/constants/locales.const';
+import { ILocaleItem } from '@models/interfaces/locale-item.interface';
 
 @Component({
   selector: 'app-language-selector',

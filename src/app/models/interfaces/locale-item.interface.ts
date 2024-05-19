@@ -1,4 +1,4 @@
-import { ELocale } from '../enums';
+import { ELocale } from '../enums/locale.enum';
 
 export interface ILocaleItem {
   value: ELocale;

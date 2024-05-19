@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthenticationError } from '@app/models/errors';
+import { AuthenticationError } from '@app/models/errors/authentication.error';
 import { Observable, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './authentication.service';
