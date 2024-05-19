@@ -1,4 +1,5 @@
-import { EReservationRequestState, EReservationType } from '../enums';
+import { EReservationRequestState } from '../enums/reservation-request-state.enum';
+import { EReservationType } from '../enums/reservation-type.enum';
 import { ERoomState } from '../enums/room-state.enum';
 import { ETechnology } from '../enums/technology.enum';
 import { IPeriodicity } from './periodicity.interface';

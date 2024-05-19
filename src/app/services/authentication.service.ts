@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IDeviceData } from '@app/models/interfaces';
+import { IDeviceData } from '@app/models/interfaces/device-data.interface';
 import { EMPTY, Observable, catchError, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ModalHelperService } from './modal-helper.service';

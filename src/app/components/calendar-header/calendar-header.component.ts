@@ -1,12 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CalendarService, I18nService } from '@app/services';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { CalendarService } from '@app/services/calendar.service';
+import { I18nService } from '@app/services/i18n.service';
 import { ModalHelperService } from '@app/services/modal-helper.service';
 import { IInterval } from '@cesnet/shongo-calendar';
 
 @Component({
   selector: 'header[app-calendar-header]',
   templateUrl: './calendar-header.component.html',
-  styleUrls: ['./calendar-header.component.scss']
+  styleUrls: ['./calendar-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarHeaderComponent {
   @Output() reservationCreated = new EventEmitter<void>();

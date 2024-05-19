@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ERequestState } from '@app/models/enums';
-import { CalendarService } from '@app/services';
+import { Component, Signal, computed } from '@angular/core';
+import { ERequestState } from '@app/models/enums/request-state.enum';
+import { CalendarService } from '@app/services/calendar.service';
 import { IInterval } from '@cesnet/shongo-calendar';
 import { CalendarView } from 'angular-calendar';
 
@@ -13,10 +13,13 @@ import { CalendarView } from 'angular-calendar';
 export class ReservationPageComponent {
   selectedSlot: IInterval | null = null;
 
+  readonly isLoadingSig: Signal<boolean>;
   readonly CalendarView = CalendarView;
   readonly ERequestState = ERequestState;
 
-  constructor(public calendarS: CalendarService) {}
+  constructor(public calendarS: CalendarService) {
+    this.isLoadingSig = computed(() => this.calendarS.stateSig() === ERequestState.LOADING);
+  }
 
   onSlotSelected(slot: IInterval | null): void {
     this.selectedSlot = slot;

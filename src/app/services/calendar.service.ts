@@ -1,10 +1,11 @@
-import { Injectable, signal } from '@angular/core';
-import { ERequestState } from '@app/models/enums';
-import { IRequest } from '@app/models/interfaces';
+import { DestroyRef, Injectable, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ERequestState } from '@app/models/enums/request-state.enum';
+import { IRequest } from '@app/models/interfaces/request.interface';
 import { ICalendarItem, IInterval } from '@cesnet/shongo-calendar';
 import { CalendarView } from 'angular-calendar';
-import { EMPTY, Observable, Subject, catchError, filter, interval, switchMap, tap } from 'rxjs';
-import { AuthenticationService } from '.';
+import { EMPTY, Observable, Subject, Subscription, catchError, filter, interval, switchMap, tap } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 import { ReservationService } from './reservation.service';
 
 const RELOAD_INTERVAL_MIN = 5;
@@ -20,13 +21,15 @@ export class CalendarService {
   readonly stateSig = signal<ERequestState>(ERequestState.LOADING);
 
   private _currentInterval: IInterval | null = null;
+  private _loadSubscription?: Subscription;
 
   private readonly _nextView$ = new Subject<void>();
   private readonly _previousView$ = new Subject<void>();
 
   constructor(
     private _reservationS: ReservationService,
-    private _authS: AuthenticationService
+    private _authS: AuthenticationService,
+    private _destroyRef: DestroyRef
   ) {
     this.nextView$ = this._nextView$.asObservable();
     this.previousView$ = this._previousView$.asObservable();
@@ -52,11 +55,11 @@ export class CalendarService {
 
   loadInterval(interval: IInterval): void {
     this._currentInterval = interval;
-    this._loadInterval$(interval, true).subscribe();
+    this._loadSubscription = this._loadInterval$(interval, true).subscribe();
   }
 
   reloadInterval(): void {
-    this._reloadInterval$().subscribe();
+    this._loadSubscription = this._reloadInterval$().subscribe();
   }
 
   /**
@@ -66,7 +69,8 @@ export class CalendarService {
     interval(RELOAD_INTERVAL_MIN * 60 * 1000)
       .pipe(
         filter(() => this._authS.isAuthenticated),
-        switchMap(() => this._reloadInterval$().pipe(catchError(() => EMPTY)))
+        switchMap(() => this._reloadInterval$().pipe(catchError(() => EMPTY))),
+        takeUntilDestroyed(this._destroyRef)
       )
       .subscribe();
   }
@@ -79,6 +83,11 @@ export class CalendarService {
   }
 
   private _loadInterval$(interval: IInterval, showLoading?: boolean): Observable<IRequest<ICalendarItem[]>> {
+    if (this._loadSubscription) {
+      this._loadSubscription?.unsubscribe();
+      this._loadSubscription = undefined;
+    }
+
     return this._reservationS.fetchInterval$(interval).pipe(
       tap((request) => {
         const state = !showLoading && request.state === ERequestState.LOADING ? ERequestState.SUCCESS : request.state;
@@ -87,7 +96,8 @@ export class CalendarService {
         if (request.state === ERequestState.SUCCESS) {
           this.calendarItemsSig.set(request.data);
         }
-      })
+      }),
+      takeUntilDestroyed(this._destroyRef)
     );
   }
 }

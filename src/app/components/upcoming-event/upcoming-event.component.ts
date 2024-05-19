@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-upcoming-event',
   templateUrl: './upcoming-event.component.html',
-  styleUrls: ['./upcoming-event.component.scss']
+  styleUrls: ['./upcoming-event.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UpcomingEventComponent {
   @Input({ required: true }) description!: string;
