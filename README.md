@@ -25,9 +25,54 @@ $ npm login --scope=@cesnet --auth-type=legacy --registry=https://npm.pkg.github
 > Password: TOKEN
 ```
 
+## Proxy
+
+The development server uses a Webpack proxy that redirects relative path requests to a desired host.
+
+By default the development server uses `https://shongo-dev.cesnet.cz:8001` as the target.
+
+If you want to use your own instance of the Shongo backend, override the target property in the `proxy.conf.mjs` file at the root of the project.
+
+## CORS
+
+The proxy should solve your client side CORS issues, however your origin address also needs to be set-up in the Shongo controller configuration in `rest-api -> origin`.
+
+When connecting to the `https://shongo-dev.cesnet.cz:8001` you should have no problem when running the dev server on the default host:port `localhost:4200`.
+
+Example Shongo controller configuration (dev only):
+
+```xml
+<rest-api>
+      <host>shongo-dev.cesnet.cz</host>
+      <port>8001</port>
+      <origin>https://shongo-dev.cesnet.cz</origin>
+      <origin>http://localhost:4200</origin>
+</rest-api>
+```
+
+## Access token
+
+When running the project for the first time, you need to provide an access token that is configured on the backend in the Shongo controller configuration. After that it will be stored in the local storage of the device for the particular host address.
+
+Example configuration:
+
+```xml
+<security>
+    <authorization>
+        <reservation-devices>
+            <device>
+                <access-token>test-token</access-token>
+                <device-id>shongo:reservation:device:1</device-id>
+                <resource-id>shongo:shongo-dev.cesnet.cz:res:3</resource-id>
+            </device>
+        </reservation-devices>
+    </authorization>
+</security>
+```
+
 ## Build
 
-- To build the application for production, use `ng build --configuration=production`.
+To build the application for production, use `ng build --configuration=production`.
 
 ## Development server
 
