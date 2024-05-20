@@ -1,5 +1,6 @@
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TranslationPipe } from '@app/pipes/translation.pipe';
 import { HappeningTodayService } from '@app/services/happening-today.service';
 import { I18nService } from '@app/services/i18n.service';
 
@@ -29,16 +30,19 @@ export class HappeningTodayPageComponent {
 
   constructor(
     public happeningTodayS: HappeningTodayService,
-    public i18nS: I18nService
+    public i18nS: I18nService,
+    private _translationP: TranslationPipe
   ) {}
 
-  getMoreEventsText(eventCount: number): string {
+  getMoreEventsText(eventCount: number): string | null {
     const moreEventsCount = eventCount - this.UPCOMING_EVENTS_LIMIT;
 
     if (moreEventsCount <= 0) {
-      return '';
+      return null;
     }
 
-    return `+${moreEventsCount} more event${moreEventsCount > 1 ? 's' : ''} today`;
+    const key = moreEventsCount > 1 ? 'NOW_HAPPENING:MORE_EVENTS' : 'NOW_HAPPENING:ONE_MORE_EVENT';
+
+    return this._translationP.transform(key, this.i18nS.selectedLocaleValueSig(), moreEventsCount);
   }
 }

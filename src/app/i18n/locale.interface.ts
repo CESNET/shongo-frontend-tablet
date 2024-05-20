@@ -5,6 +5,8 @@ export interface ILocale {
   ['NOW_HAPPENING:NEXT_MEETING_IN']: string;
   ['NOW_HAPPENING:NO_MORE_MEETINGS']: string;
   ['NOW_HAPPENING:BOOK_NOW']: string;
+  ['NOW_HAPPENING:ONE_MORE_EVENT']: string;
+  ['NOW_HAPPENING:MORE_EVENTS']: string;
   ['HEADER:RESERVE']: string;
   ['HEADER:BACK']: string;
   ['HEADER:TODAY']: string;
