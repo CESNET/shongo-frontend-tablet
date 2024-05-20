@@ -7,6 +7,8 @@ export const I18N_CS: ILocale = {
   ['NOW_HAPPENING:NEXT_MEETING_IN']: 'Další schůzka {PARAM}',
   ['NOW_HAPPENING:NO_MORE_MEETINGS']: 'Žádné další schůzky',
   ['NOW_HAPPENING:BOOK_NOW']: 'Rezervovat nyní',
+  ['NOW_HAPPENING:ONE_MORE_EVENT']: '+{PARAM} další schůzka',
+  ['NOW_HAPPENING:MORE_EVENTS']: '+{PARAM} další schůzky',
   ['HEADER:RESERVE']: 'Rezervovat',
   ['HEADER:BACK']: 'Zpět',
   ['HEADER:TODAY']: 'Dnes',
